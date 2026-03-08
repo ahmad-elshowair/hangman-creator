@@ -169,17 +169,25 @@ export default function SetupContent() {
 
         {/* Word List */}
         {words.length > 0 && (
-          <Box
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 1,
-              p: 2,
-              borderRadius: 3,
-              background: isDark ? "rgba(255, 255, 255, 0.03)" : "rgba(0, 0, 0, 0.02)",
-              border: isDark ? "1px solid rgba(255, 255, 255, 0.06)" : "1px solid rgba(0, 0, 0, 0.06)",
-            }}
-          >
+          <Box sx={{ mb: 2 }}>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ mb: 1, fontStyle: "italic", textAlign: "center", fontSize: "0.8rem", opacity: 0.8 }}
+            >
+              Words are blurred to hide them from students. Hover over a word to reveal it.
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 1,
+                p: 2,
+                borderRadius: 3,
+                background: isDark ? "rgba(255, 255, 255, 0.03)" : "rgba(0, 0, 0, 0.02)",
+                border: isDark ? "1px solid rgba(255, 255, 255, 0.06)" : "1px solid rgba(0, 0, 0, 0.06)",
+              }}
+            >
             {words.map((word, i) => (
               <Chip
                 key={i}
@@ -195,12 +203,21 @@ export default function SetupContent() {
                   fontSize: "0.9rem",
                   background: "rgba(124, 77, 255, 0.12)",
                   border: "1px solid rgba(124, 77, 255, 0.2)",
+                  transition: "all 0.3s ease",
+                  "& .MuiChip-label": {
+                    filter: "blur(4px)",
+                    transition: "filter 0.3s ease",
+                  },
                   "&:hover": {
                     background: "rgba(124, 77, 255, 0.2)",
+                    "& .MuiChip-label": {
+                      filter: "blur(0)",
+                    },
                   },
                 }}
               />
             ))}
+            </Box>
           </Box>
         )}
 

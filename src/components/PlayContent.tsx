@@ -131,7 +131,7 @@ function GameView({ config }: GameViewProps) {
             {allCorrect ? "Perfect Score!" : "Game Over!"}
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
-            You completed all {totalWords} words
+            You completed all {totalWords} word{totalWords === 1 ? "" : "s"}
           </Typography>
 
           {/* Stats */}
@@ -191,8 +191,7 @@ function GameView({ config }: GameViewProps) {
                       ? "rgba(105, 240, 174, 0.12)"
                       : "rgba(255, 82, 82, 0.12)",
                   border: `1px solid ${results[i] === "win" ? "rgba(105, 240, 174, 0.3)" : "rgba(255, 82, 82, 0.3)"}`,
-                  color:
-                    results[i] === "win" ? "success.main" : "error.main",
+                  color: results[i] === "win" ? "success.main" : "error.main",
                 }}
               >
                 {word}
@@ -282,7 +281,8 @@ function GameView({ config }: GameViewProps) {
           <Typography
             variant="body2"
             sx={{
-              color: mistakes > maxMistakes * 0.6 ? "error.main" : "text.secondary",
+              color:
+                mistakes > maxMistakes * 0.6 ? "error.main" : "text.secondary",
               fontWeight: mistakes > maxMistakes * 0.6 ? 700 : 400,
               transition: "all 0.3s ease",
             }}
@@ -296,7 +296,9 @@ function GameView({ config }: GameViewProps) {
           sx={{
             height: 6,
             borderRadius: 3,
-            backgroundColor: isDark ? "rgba(255, 255, 255, 0.06)" : "rgba(0, 0, 0, 0.08)",
+            backgroundColor: isDark
+              ? "rgba(255, 255, 255, 0.06)"
+              : "rgba(0, 0, 0, 0.08)",
             "& .MuiLinearProgress-bar": {
               borderRadius: 3,
               background: "linear-gradient(90deg, #7C4DFF, #00E5FF)",
@@ -393,7 +395,13 @@ function GameView({ config }: GameViewProps) {
             id="next-word-btn"
             variant="contained"
             size="large"
-            endIcon={currentWordIndex === totalWords - 1 ? <TrophyIcon /> : <NextIcon />}
+            endIcon={
+              currentWordIndex === totalWords - 1 ? (
+                <TrophyIcon />
+              ) : (
+                <NextIcon />
+              )
+            }
             onClick={nextWord}
             sx={{
               borderRadius: 3,
