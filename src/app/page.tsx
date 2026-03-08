@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import {
   Box,
@@ -27,18 +27,15 @@ import {
 
 export default function SetupPage() {
   const router = useRouter();
-  const [maxMistakes, setMaxMistakes] = useState(6);
-  const [words, setWords] = useState<string[]>([]);
-  const [currentWord, setCurrentWord] = useState("");
-
-  // Load persisted config on mount
-  useEffect(() => {
+  const [maxMistakes, setMaxMistakes] = useState(() => {
     const config = loadGameConfig();
-    if (config) {
-      setWords(config.words);
-      setMaxMistakes(config.maxMistakes);
-    }
-  }, []);
+    return config?.maxMistakes ?? 6;
+  });
+  const [words, setWords] = useState<string[]>(() => {
+    const config = loadGameConfig();
+    return config?.words ?? [];
+  });
+  const [currentWord, setCurrentWord] = useState("");
 
   const addWord = useCallback(() => {
     const trimmed = currentWord.trim();

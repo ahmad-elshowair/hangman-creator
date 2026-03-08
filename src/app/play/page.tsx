@@ -24,20 +24,15 @@ import WordDisplay from "@/components/WordDisplay";
 
 export default function PlayPage() {
   const router = useRouter();
-  const [config, setConfig] = useState<GameConfig | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [config] = useState<GameConfig | null>(() => loadGameConfig());
 
   useEffect(() => {
-    const loaded = loadGameConfig();
-    if (!loaded) {
+    if (!config) {
       router.replace("/");
-      return;
     }
-    setConfig(loaded);
-    setLoading(false);
-  }, [router]);
+  }, [config, router]);
 
-  if (loading || !config) {
+  if (!config) {
     return (
       <Container maxWidth="sm" sx={{ py: 8 }}>
         <LinearProgress
@@ -72,7 +67,6 @@ function GameView({ config }: GameViewProps) {
     mistakes,
     maxMistakes,
     isWordWon,
-    isWordLost,
     isWordFinished,
     isGameOver,
     results,
