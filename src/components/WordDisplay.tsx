@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 
 interface WordDisplayProps {
   maskedWord: string[];
@@ -15,6 +15,9 @@ export default function WordDisplay({
   currentWord,
   isWordWon,
 }: WordDisplayProps) {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+
   return (
     <Box
       sx={{
@@ -84,7 +87,9 @@ export default function WordDisplay({
                     ? "linear-gradient(90deg, #FF5252, #FF8A80)"
                     : isRevealed
                       ? "linear-gradient(90deg, #7C4DFF, #B388FF)"
-                      : "rgba(255, 255, 255, 0.15)",
+                      : isDark
+                        ? "rgba(255, 255, 255, 0.2)"
+                        : "rgba(0, 0, 0, 0.25)",
                   transition: "background 0.3s ease",
                 }}
               />

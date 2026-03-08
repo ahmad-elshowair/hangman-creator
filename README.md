@@ -38,7 +38,7 @@ Open [http://localhost:3000](http://localhost:3000) to start creating your Hangm
 ## 🛠️ Tech Stack
 
 | Technology | Purpose |
-|---|---|
+| --- | --- |
 | [Next.js 16](https://nextjs.org/) | React framework with App Router |
 | [TypeScript](https://www.typescriptlang.org/) | Type safety |
 | [MUI v7](https://mui.com/) | Component library and theming |
@@ -47,7 +47,7 @@ Open [http://localhost:3000](http://localhost:3000) to start creating your Hangm
 
 ## 📁 Project Structure
 
-```
+```text
 src/
 ├── app/
 │   ├── page.tsx          # Teacher Setup page
