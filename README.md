@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎮 Hangman Game Creator
 
-## Getting Started
+A beautiful, teacher-friendly Hangman game built with **Next.js**, **TypeScript**, and **MUI**. Set up custom word lists for your students, configure difficulty, and let them play — right in the browser!
 
-First, run the development server:
+## ✨ Features
+
+- **🎯 Teacher Setup** — Add words, set max allowed mistakes, and launch the game with one click
+- **⌨️ Interactive Gameplay** — On-screen keyboard with color-coded feedback (green for correct, red for wrong)
+- **🎨 Animated Hangman** — SVG figure that draws progressively as mistakes increase
+- **🌗 Light / Dark Mode** — Toggle between themes, preference saved in localStorage
+- **💾 Persistent State** — Word lists and settings survive page refreshes via localStorage
+- **📊 End-of-Game Summary** — See your score, win/loss breakdown, and per-word results
+- **📱 Responsive Design** — Works on desktop and mobile screens
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) 18+
+- [pnpm](https://pnpm.io/) (recommended)
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Clone the repository
+git clone <your-repo-url>
+cd hangman-creator
+
+# Install dependencies
+pnpm install
+
+# Start the development server
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to start creating your Hangman game!
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Technology | Purpose |
+|---|---|
+| [Next.js 16](https://nextjs.org/) | React framework with App Router |
+| [TypeScript](https://www.typescriptlang.org/) | Type safety |
+| [MUI v7](https://mui.com/) | Component library and theming |
+| [Emotion](https://emotion.sh/) | CSS-in-JS styling |
+| [Outfit](https://fonts.google.com/specimen/Outfit) | Google Font |
 
-## Learn More
+## 📁 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/
+│   ├── page.tsx          # Teacher Setup page
+│   ├── play/page.tsx     # Game Player page
+│   ├── layout.tsx        # Root layout with theme + footer
+│   └── globals.css       # Base CSS styles
+├── components/
+│   ├── HangmanFigure.tsx # Animated SVG hangman
+│   ├── Keyboard.tsx      # On-screen letter keyboard
+│   ├── WordDisplay.tsx   # Masked word with blanks
+│   ├── ThemeToggle.tsx   # Light/Dark mode toggle
+│   ├── ThemeRegistry.tsx # MUI ThemeProvider wrapper
+│   └── Footer.tsx        # Footer with attribution
+├── hooks/
+│   └── useHangman.ts     # Game logic hook
+├── utils/
+│   └── storage.ts        # localStorage helpers
+├── context/
+│   └── ThemeModeContext.tsx # Theme mode context
+└── theme.ts              # Light & dark MUI themes
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📝 How It Works
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Setup** — The teacher visits the home page, sets the maximum number of mistakes, and adds words to the list
+2. **Play** — Click "Start Game" and hand the device to a student. They guess letters using the keyboard
+3. **Progress** — After each word (win or lose), click "Next Word" to continue
+4. **Results** — After all words are completed, a summary screen shows the final score
 
-## Deploy on Vercel
+## 👤 Author
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Created with ❤️ by [Ahmad Elshowair](https://www.linkedin.com/in/ahmad-elshowair/)
