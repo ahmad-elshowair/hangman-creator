@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useGameStore } from "@/store/useGameStore";
+import { useEffect, useState as useReactState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 import {
@@ -20,57 +21,53 @@ import {
   PlayArrow as PlayIcon,
   DeleteSweep as ClearIcon,
 } from "@mui/icons-material";
-import {
-  saveGameConfig,
-  loadGameConfig,
-  clearGameConfig,
-} from "@/utils/storage";
 
 export default function SetupContent() {
   const router = useRouter();
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
-  const [maxMistakes, setMaxMistakes] = useState(() => {
-    const config = loadGameConfig();
-    return config?.maxMistakes ?? 6;
-  });
-  const [words, setWords] = useState<string[]>(() => {
-    const config = loadGameConfig();
-    return config?.words ?? [];
-  });
-  const [currentWord, setCurrentWord] = useState("");
+  const [mounted, setMounted] = useReactState(false);
+  const {
+    words,
+    maxMistakes,
+    addWord,
+    removeWord,
+    setMaxMistakes,
+    clearConfig,
+  } = useGameStore();
 
-  const addWord = useCallback(() => {
-    const trimmed = currentWord.trim();
-    if (!trimmed) return;
-    if (words.some((w) => w.toLowerCase() === trimmed.toLowerCase())) return;
-    setWords((prev) => [...prev, trimmed]);
+  const [currentWord, setCurrentWord] = useReactState("");
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, [setMounted]);
+
+  const handleAdd = () => {
+    addWord(currentWord);
     setCurrentWord("");
-  }, [currentWord, words]);
-
-  const removeWord = (index: number) => {
-    setWords((prev) => prev.filter((_, i) => i !== index));
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      addWord();
+      handleAdd();
     }
   };
 
   const handleStart = () => {
     if (words.length === 0) return;
-    saveGameConfig({ words, maxMistakes });
     router.push("/play");
   };
 
   const handleClear = () => {
-    clearGameConfig();
-    setWords([]);
-    setMaxMistakes(6);
+    clearConfig();
     setCurrentWord("");
   };
+
+  if (!mounted) {
+    return null; // or a loading skeleton
+  }
 
   return (
     <Container maxWidth="sm" sx={{ py: { xs: 4, md: 6 } }}>
@@ -161,7 +158,7 @@ export default function SetupContent() {
           <Button
             id="add-word-btn"
             variant="contained"
-            onClick={addWord}
+            onClick={handleAdd}
             disabled={!currentWord.trim()}
             sx={{ minWidth: 48, px: 1 }}
           >

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useTheme } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 import {
@@ -17,42 +17,45 @@ import {
   Edit as EditIcon,
   EmojiEvents as TrophyIcon,
 } from "@mui/icons-material";
-import { loadGameConfig, type GameConfig } from "@/utils/storage";
 import { useHangman } from "@/hooks/useHangman";
+import { useGameStore } from "@/store/useGameStore";
 import HangmanFigure from "@/components/HangmanFigure";
 import Keyboard from "@/components/Keyboard";
 import WordDisplay from "@/components/WordDisplay";
 
 export default function PlayContent() {
   const router = useRouter();
-  const [config] = useState<GameConfig | null>(() => loadGameConfig());
+  const { words, maxMistakes, hasHydrated } = useGameStore();
 
-  useEffect(() => {
-    if (!config) {
-      router.replace("/");
-    }
-  }, [config, router]);
+  if (!hasHydrated) {
+    return null; // Or skeleton
+  }
 
-  if (!config) {
+  if (!words || words.length === 0) {
     return (
-      <Container maxWidth="sm" sx={{ py: 8 }}>
-        <LinearProgress
-          sx={{
-            borderRadius: 2,
-            "& .MuiLinearProgress-bar": {
-              background: "linear-gradient(90deg, #7C4DFF, #00E5FF)",
-            },
-          }}
-        />
+      <Container maxWidth="sm" sx={{ py: 8, textAlign: "center" }}>
+        <Typography variant="h5" sx={{ mb: 2 }}>
+          No Game Configuration Found
+        </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
+          Please go to setup and add some words to play.
+        </Typography>
+        <Button
+          variant="contained"
+          onClick={() => router.push("/")}
+          startIcon={<EditIcon />}
+        >
+          Go back to Setup
+        </Button>
       </Container>
     );
   }
 
-  return <GameView config={config} />;
+  return <GameView config={{ words, maxMistakes }} />;
 }
 
 interface GameViewProps {
-  config: GameConfig;
+  config: { words: string[]; maxMistakes: number };
 }
 
 function GameView({ config }: GameViewProps) {
