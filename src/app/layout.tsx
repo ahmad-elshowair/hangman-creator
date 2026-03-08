@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import ThemeRegistry from "@/components/ThemeRegistry";
+import Footer from "@/components/Footer";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -22,8 +23,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={outfit.variable}>
-        <ThemeRegistry>{children}</ThemeRegistry>
+      <body
+        className={outfit.variable}
+        style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+      >
+        <ThemeRegistry>
+          <main style={{ flex: 1 }}>{children}</main>
+          <Footer />
+        </ThemeRegistry>
       </body>
     </html>
   );
