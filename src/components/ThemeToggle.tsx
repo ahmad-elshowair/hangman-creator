@@ -1,6 +1,6 @@
 "use client";
 
-import { IconButton, Tooltip } from "@mui/material";
+import { IconButton, Tooltip, IconButtonProps } from "@mui/material";
 import {
   DarkMode as DarkIcon,
   LightMode as LightIcon,
@@ -8,7 +8,8 @@ import {
 import { useThemeStore } from "@/store/useThemeStore";
 import { useEffect, useState } from "react";
 
-export default function ThemeToggle() {
+export default function ThemeToggle(props: IconButtonProps) {
+  const { sx, ...rest } = props;
   const mode = useThemeStore((state) => state.mode);
   const toggleMode = useThemeStore((state) => state.toggleMode);
   const [mounted, setMounted] = useState(false);
@@ -29,11 +30,8 @@ export default function ThemeToggle() {
       <IconButton
         id="theme-toggle-btn"
         onClick={toggleMode}
+        {...rest}
         sx={{
-          position: "fixed",
-          top: { xs: 12, md: 16 },
-          right: { xs: 12, md: 16 },
-          zIndex: 1200,
           width: { xs: 40, md: 44 },
           height: { xs: 40, md: 44 },
           background:
@@ -53,6 +51,7 @@ export default function ThemeToggle() {
                 : "rgba(0, 0, 0, 0.1)",
             transform: "rotate(30deg)",
           },
+          ...sx,
         }}
       >
         {mode === "dark" ? (

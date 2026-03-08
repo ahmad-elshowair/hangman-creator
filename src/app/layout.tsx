@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import ThemeRegistry from "@/components/ThemeRegistry";
-import ThemeToggle from "@/components/ThemeToggle";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const outfit = Outfit({
@@ -29,7 +29,7 @@ export default function RootLayout({
         style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
       >
         <ThemeRegistry>
-          <ThemeToggle />
+          <Header />
           <main style={{ flex: 1 }}>{children}</main>
           <Footer />
         </ThemeRegistry>

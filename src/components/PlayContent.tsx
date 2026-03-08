@@ -7,10 +7,8 @@ import {
   Box,
   Button,
   Container,
-  IconButton,
   LinearProgress,
   Paper,
-  Tooltip,
   Typography,
 } from "@mui/material";
 import {
@@ -18,7 +16,6 @@ import {
   Replay as ReplayIcon,
   Edit as EditIcon,
   EmojiEvents as TrophyIcon,
-  Home as HomeIcon,
 } from "@mui/icons-material";
 import { loadGameConfig, type GameConfig } from "@/utils/storage";
 import { useHangman } from "@/hooks/useHangman";
@@ -233,38 +230,6 @@ function GameView({ config }: GameViewProps) {
 
   return (
     <Container maxWidth="sm" sx={{ py: { xs: 3, md: 5 } }}>
-      {/* Back to Home */}
-      <Tooltip title="Back to Setup">
-        <IconButton
-          id="back-home-btn"
-          onClick={() => router.push("/")}
-          sx={{
-            position: "fixed",
-            top: 16,
-            left: 16,
-            zIndex: 1200,
-            width: 44,
-            height: 44,
-            background: isDark
-              ? "rgba(255, 255, 255, 0.08)"
-              : "rgba(0, 0, 0, 0.06)",
-            backdropFilter: "blur(8px)",
-            border: isDark
-              ? "1px solid rgba(255, 255, 255, 0.1)"
-              : "1px solid rgba(0, 0, 0, 0.1)",
-            transition: "all 0.3s ease",
-            "&:hover": {
-              background: isDark
-                ? "rgba(255, 255, 255, 0.15)"
-                : "rgba(0, 0, 0, 0.1)",
-              color: "primary.main",
-            },
-          }}
-        >
-          <HomeIcon sx={{ fontSize: 24, color: "text.primary" }} />
-        </IconButton>
-      </Tooltip>
-
       {/* Progress bar */}
       <Box sx={{ mb: 3 }}>
         <Box
