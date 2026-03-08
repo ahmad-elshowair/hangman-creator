@@ -86,9 +86,9 @@ export default function Keyboard({
               disabled={disabled || guessedLetters.has(letter)}
               onClick={() => onGuess(letter)}
               sx={{
-                minWidth: { xs: 28, sm: 40 },
-                height: { xs: 36, sm: 44 },
-                fontSize: { xs: "0.8rem", sm: "1rem" },
+                minWidth: { xs: 36, sm: 48 },
+                height: { xs: 44, sm: 52 },
+                fontSize: { xs: "0.95rem", sm: "1.15rem" },
                 fontWeight: 700,
                 borderRadius: 2,
                 p: 0,

@@ -330,7 +330,7 @@ function GameView({ config }: GameViewProps) {
             display: "flex",
             justifyContent: "center",
             flexWrap: "wrap",
-            gap: 0.5,
+            gap: 1,
             mb: 2,
           }}
         >
@@ -338,8 +338,8 @@ function GameView({ config }: GameViewProps) {
             <Typography
               key={letter}
               sx={{
-                fontSize: "0.85rem",
-                fontWeight: 600,
+                fontSize: "1.1rem",
+                fontWeight: 700,
                 color: "error.main",
                 opacity: 0.6,
                 textDecoration: "line-through",
