@@ -7,6 +7,7 @@ import {
   Box,
   Button,
   Container,
+  IconButton,
   LinearProgress,
   Paper,
   Typography,
@@ -16,6 +17,7 @@ import {
   Replay as ReplayIcon,
   Edit as EditIcon,
   EmojiEvents as TrophyIcon,
+  Home as HomeIcon,
 } from "@mui/icons-material";
 import { loadGameConfig, type GameConfig } from "@/utils/storage";
 import { useHangman } from "@/hooks/useHangman";
@@ -231,6 +233,19 @@ function GameView({ config }: GameViewProps) {
 
   return (
     <Container maxWidth="sm" sx={{ py: { xs: 3, md: 5 } }}>
+      {/* Back to Home */}
+      <IconButton
+        id="back-home-btn"
+        onClick={() => router.push("/")}
+        sx={{
+          mb: 1,
+          color: "text.secondary",
+          "&:hover": { color: "primary.main" },
+        }}
+      >
+        <HomeIcon />
+      </IconButton>
+
       {/* Progress bar */}
       <Box sx={{ mb: 3 }}>
         <Box
