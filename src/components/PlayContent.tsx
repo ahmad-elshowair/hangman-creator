@@ -393,7 +393,7 @@ function GameView({ config }: GameViewProps) {
             id="next-word-btn"
             variant="contained"
             size="large"
-            endIcon={<NextIcon />}
+            endIcon={currentWordIndex === totalWords - 1 ? <TrophyIcon /> : <NextIcon />}
             onClick={nextWord}
             sx={{
               borderRadius: 3,
@@ -402,7 +402,7 @@ function GameView({ config }: GameViewProps) {
               fontSize: "1.1rem",
             }}
           >
-            Next Word
+            {currentWordIndex === totalWords - 1 ? "Finish Game" : "Next Word"}
           </Button>
         </Box>
       ) : (
