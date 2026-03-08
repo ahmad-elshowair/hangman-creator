@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { useTheme } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 import {
   Box,
@@ -27,6 +28,8 @@ import {
 
 export default function SetupContent() {
   const router = useRouter();
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
   const [maxMistakes, setMaxMistakes] = useState(() => {
     const config = loadGameConfig();
     return config?.maxMistakes ?? 6;
@@ -98,7 +101,7 @@ export default function SetupContent() {
         sx={{
           p: { xs: 3, md: 4 },
           mb: 3,
-          background: "rgba(18, 24, 48, 0.7)",
+          background: isDark ? "rgba(18, 24, 48, 0.7)" : undefined,
         }}
       >
         {/* Max Mistakes */}
@@ -173,8 +176,8 @@ export default function SetupContent() {
               gap: 1,
               p: 2,
               borderRadius: 3,
-              background: "rgba(255, 255, 255, 0.03)",
-              border: "1px solid rgba(255, 255, 255, 0.06)",
+              background: isDark ? "rgba(255, 255, 255, 0.03)" : "rgba(0, 0, 0, 0.02)",
+              border: isDark ? "1px solid rgba(255, 255, 255, 0.06)" : "1px solid rgba(0, 0, 0, 0.06)",
             }}
           >
             {words.map((word, i) => (

@@ -23,14 +23,16 @@ export default function Keyboard({
 }: KeyboardProps) {
   const theme = useTheme();
 
+  const isDark = theme.palette.mode === "dark";
+
   const getKeyStyles = (letter: string) => {
     const guessed = guessedLetters.has(letter);
     const correct = correctLetters.has(letter);
 
     if (!guessed) {
       return {
-        background: "rgba(255, 255, 255, 0.06)",
-        border: "1px solid rgba(255, 255, 255, 0.1)",
+        background: isDark ? "rgba(255, 255, 255, 0.06)" : "rgba(0, 0, 0, 0.04)",
+        border: isDark ? "1px solid rgba(255, 255, 255, 0.1)" : "1px solid rgba(0, 0, 0, 0.12)",
         color: theme.palette.text.primary,
         "&:hover": {
           background: "rgba(124, 77, 255, 0.2)",

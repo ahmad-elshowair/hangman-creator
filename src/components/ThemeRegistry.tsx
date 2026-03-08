@@ -3,7 +3,20 @@
 import * as React from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import theme from "@/theme";
+import { darkTheme, lightTheme } from "@/theme";
+import { ThemeModeProvider, useThemeMode } from "@/context/ThemeModeContext";
+
+function ThemeWrapper({ children }: { children: React.ReactNode }) {
+  const { mode } = useThemeMode();
+  const theme = mode === "dark" ? darkTheme : lightTheme;
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
+  );
+}
 
 export default function ThemeRegistry({
   children,
@@ -11,9 +24,8 @@ export default function ThemeRegistry({
   children: React.ReactNode;
 }) {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {children}
-    </ThemeProvider>
+    <ThemeModeProvider>
+      <ThemeWrapper>{children}</ThemeWrapper>
+    </ThemeModeProvider>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 
 interface HangmanFigureProps {
   mistakes: number;
@@ -120,6 +120,9 @@ export default function HangmanFigure({
   mistakes,
   maxMistakes,
 }: HangmanFigureProps) {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+
   // Map mistakes to body parts based on maxMistakes
   // This distributes the body parts evenly across the allowed mistakes
   const totalParts = BODY_PARTS.length;
@@ -140,7 +143,7 @@ export default function HangmanFigure({
       <svg
         viewBox="0 0 250 220"
         width="100%"
-        style={{ maxWidth: 280, color: "#E8EAED" }}
+        style={{ maxWidth: 280, color: isDark ? "#E8EAED" : "#1A1A2E" }}
       >
         {/* Gallows */}
         {/* Base */}

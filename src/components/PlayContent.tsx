@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTheme } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 import {
   Box,
@@ -56,6 +57,8 @@ interface GameViewProps {
 
 function GameView({ config }: GameViewProps) {
   const router = useRouter();
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
   const {
     currentWord,
     currentWordIndex,
@@ -99,7 +102,7 @@ function GameView({ config }: GameViewProps) {
           sx={{
             p: { xs: 3, md: 5 },
             textAlign: "center",
-            background: "rgba(18, 24, 48, 0.7)",
+            background: isDark ? "rgba(18, 24, 48, 0.7)" : undefined,
           }}
         >
           <TrophyIcon
@@ -258,7 +261,7 @@ function GameView({ config }: GameViewProps) {
           sx={{
             height: 6,
             borderRadius: 3,
-            backgroundColor: "rgba(255, 255, 255, 0.06)",
+            backgroundColor: isDark ? "rgba(255, 255, 255, 0.06)" : "rgba(0, 0, 0, 0.08)",
             "& .MuiLinearProgress-bar": {
               borderRadius: 3,
               background: "linear-gradient(90deg, #7C4DFF, #00E5FF)",
@@ -273,7 +276,7 @@ function GameView({ config }: GameViewProps) {
         sx={{
           p: 2,
           mb: 2,
-          background: "rgba(18, 24, 48, 0.5)",
+          background: isDark ? "rgba(18, 24, 48, 0.5)" : undefined,
         }}
       >
         <HangmanFigure mistakes={mistakes} maxMistakes={maxMistakes} />
