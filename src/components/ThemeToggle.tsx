@@ -5,23 +5,37 @@ import {
   DarkMode as DarkIcon,
   LightMode as LightIcon,
 } from "@mui/icons-material";
-import { useThemeMode } from "@/context/ThemeModeContext";
+import { useThemeStore } from "@/store/useThemeStore";
+import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
-  const { mode, toggleMode } = useThemeMode();
+  const mode = useThemeStore((state) => state.mode);
+  const toggleMode = useThemeStore((state) => state.toggleMode);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
-    <Tooltip title={mode === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}>
+    <Tooltip
+      title={mode === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+    >
       <IconButton
         id="theme-toggle-btn"
         onClick={toggleMode}
         sx={{
           position: "fixed",
-          top: 16,
-          right: 16,
+          top: { xs: 12, md: 16 },
+          right: { xs: 12, md: 16 },
           zIndex: 1200,
-          width: 44,
-          height: 44,
+          width: { xs: 40, md: 44 },
+          height: { xs: 40, md: 44 },
           background:
             mode === "dark"
               ? "rgba(255, 255, 255, 0.08)"

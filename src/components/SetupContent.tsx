@@ -81,7 +81,9 @@ export default function SetupContent() {
           component="h1"
           sx={{
             fontWeight: 800,
-            background: "linear-gradient(135deg, #B388FF 0%, #7C4DFF 50%, #00E5FF 100%)",
+            fontSize: { xs: "2.2rem", md: "3rem" },
+            background:
+              "linear-gradient(135deg, #B388FF 0%, #7C4DFF 50%, #00E5FF 100%)",
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
@@ -99,7 +101,7 @@ export default function SetupContent() {
       <Paper
         elevation={0}
         sx={{
-          p: { xs: 3, md: 4 },
+          p: { xs: 2.5, md: 4 },
           mb: 3,
           background: isDark ? "rgba(18, 24, 48, 0.7)" : undefined,
         }}
@@ -173,9 +175,16 @@ export default function SetupContent() {
             <Typography
               variant="body2"
               color="text.secondary"
-              sx={{ mb: 1, fontStyle: "italic", textAlign: "center", fontSize: "0.8rem", opacity: 0.8 }}
+              sx={{
+                mb: 1,
+                fontStyle: "italic",
+                textAlign: "center",
+                fontSize: "0.8rem",
+                opacity: 0.8,
+              }}
             >
-              Words are blurred to hide them from students. Hover over a word to reveal it.
+              Words are blurred to hide them from students. Hover over a word to
+              reveal it.
             </Typography>
             <Box
               sx={{
@@ -184,39 +193,43 @@ export default function SetupContent() {
                 gap: 1,
                 p: 2,
                 borderRadius: 3,
-                background: isDark ? "rgba(255, 255, 255, 0.03)" : "rgba(0, 0, 0, 0.02)",
-                border: isDark ? "1px solid rgba(255, 255, 255, 0.06)" : "1px solid rgba(0, 0, 0, 0.06)",
+                background: isDark
+                  ? "rgba(255, 255, 255, 0.03)"
+                  : "rgba(0, 0, 0, 0.02)",
+                border: isDark
+                  ? "1px solid rgba(255, 255, 255, 0.06)"
+                  : "1px solid rgba(0, 0, 0, 0.06)",
               }}
             >
-            {words.map((word, i) => (
-              <Chip
-                key={i}
-                label={word}
-                onDelete={() => removeWord(i)}
-                deleteIcon={
-                  <IconButton size="small" sx={{ color: "error.main" }}>
-                    <DeleteIcon fontSize="small" />
-                  </IconButton>
-                }
-                sx={{
-                  fontWeight: 500,
-                  fontSize: "0.9rem",
-                  background: "rgba(124, 77, 255, 0.12)",
-                  border: "1px solid rgba(124, 77, 255, 0.2)",
-                  transition: "all 0.3s ease",
-                  "& .MuiChip-label": {
-                    filter: "blur(4px)",
-                    transition: "filter 0.3s ease",
-                  },
-                  "&:hover": {
-                    background: "rgba(124, 77, 255, 0.2)",
+              {words.map((word, i) => (
+                <Chip
+                  key={i}
+                  label={word}
+                  onDelete={() => removeWord(i)}
+                  deleteIcon={
+                    <IconButton size="small" sx={{ color: "error.main" }}>
+                      <DeleteIcon fontSize="small" />
+                    </IconButton>
+                  }
+                  sx={{
+                    fontWeight: 500,
+                    fontSize: "0.9rem",
+                    background: "rgba(124, 77, 255, 0.12)",
+                    border: "1px solid rgba(124, 77, 255, 0.2)",
+                    transition: "all 0.3s ease",
                     "& .MuiChip-label": {
-                      filter: "blur(0)",
+                      filter: "blur(4px)",
+                      transition: "filter 0.3s ease",
                     },
-                  },
-                }}
-              />
-            ))}
+                    "&:hover": {
+                      background: "rgba(124, 77, 255, 0.2)",
+                      "& .MuiChip-label": {
+                        filter: "blur(0)",
+                      },
+                    },
+                  }}
+                />
+              ))}
             </Box>
           </Box>
         )}
@@ -233,7 +246,13 @@ export default function SetupContent() {
       </Paper>
 
       {/* Action Buttons */}
-      <Box sx={{ display: "flex", gap: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", sm: "row" },
+          gap: 2,
+        }}
+      >
         <Button
           id="clear-btn"
           variant="outlined"
