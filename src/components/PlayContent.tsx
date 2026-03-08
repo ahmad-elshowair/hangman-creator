@@ -238,12 +238,29 @@ function GameView({ config }: GameViewProps) {
         id="back-home-btn"
         onClick={() => router.push("/")}
         sx={{
-          mb: 1,
-          color: "text.secondary",
-          "&:hover": { color: "primary.main" },
+          position: "fixed",
+          top: 16,
+          left: 16,
+          zIndex: 1200,
+          width: 44,
+          height: 44,
+          background: isDark
+            ? "rgba(255, 255, 255, 0.08)"
+            : "rgba(0, 0, 0, 0.06)",
+          backdropFilter: "blur(8px)",
+          border: isDark
+            ? "1px solid rgba(255, 255, 255, 0.1)"
+            : "1px solid rgba(0, 0, 0, 0.1)",
+          transition: "all 0.3s ease",
+          "&:hover": {
+            background: isDark
+              ? "rgba(255, 255, 255, 0.15)"
+              : "rgba(0, 0, 0, 0.1)",
+            color: "primary.main",
+          },
         }}
       >
-        <HomeIcon />
+        <HomeIcon sx={{ fontSize: 24, color: "text.primary" }} />
       </IconButton>
 
       {/* Progress bar */}
