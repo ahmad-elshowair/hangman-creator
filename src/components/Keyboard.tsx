@@ -92,10 +92,8 @@ export default function Keyboard({
     }
 
     const errorColor = theme.palette.error.main;
-    const errorBorder = `1px solid rgba(255, 82, 82, 0.4)`;
-    const errorBg = isDark
-      ? "rgba(255, 82, 82, 0.15)"
-      : "rgba(255, 82, 82, 0.25)";
+    const errorBorder = "none";
+    const errorBg = "transparent";
     const errorText = isDark ? "#ffb4ab" : errorColor;
 
     return {
