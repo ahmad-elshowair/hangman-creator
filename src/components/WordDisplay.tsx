@@ -23,8 +23,9 @@ export default function WordDisplay({
       sx={{
         display: "flex",
         justifyContent: "center",
-        flexWrap: "wrap",
-        gap: { xs: 1, sm: 1.5 },
+        flexWrap: "nowrap",
+        width: "100%",
+        gap: { xs: 0.5, sm: 1 },
         my: 3,
       }}
     >
@@ -38,7 +39,9 @@ export default function WordDisplay({
         const displayChar = showMissed ? currentWord[i] : char;
 
         if (isSpace) {
-          return <Box key={i} sx={{ width: { xs: 16, sm: 24 } }} />;
+          return (
+            <Box key={i} sx={{ width: { xs: 12, sm: 20 }, flexShrink: 0 }} />
+          );
         }
 
         return (
@@ -48,7 +51,9 @@ export default function WordDisplay({
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              minWidth: { xs: 28, sm: 40 },
+              flex: "1 1 0",
+              minWidth: 0,
+              maxWidth: { xs: 32, sm: 48 },
               animation: isRevealed
                 ? "popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards"
                 : showMissed
@@ -61,7 +66,10 @@ export default function WordDisplay({
               component="span"
               sx={{
                 fontWeight: 800,
-                fontSize: { xs: "1.5rem", sm: "2.2rem" },
+                fontSize: {
+                  xs: "clamp(1rem, 5vw, 1.5rem)",
+                  sm: "clamp(1.2rem, 4vw, 2.2rem)",
+                },
                 letterSpacing: "0.05em",
                 color: showMissed
                   ? "error.main"
@@ -72,7 +80,11 @@ export default function WordDisplay({
                 transition: "color 0.3s ease",
               }}
             >
-              {isHyphen ? "-" : isRevealed || showMissed ? displayChar : "\u00A0"}
+              {isHyphen
+                ? "-"
+                : isRevealed || showMissed
+                  ? displayChar
+                  : "\u00A0"}
             </Typography>
 
             {/* Underline for letters (not spaces or hyphens) */}
