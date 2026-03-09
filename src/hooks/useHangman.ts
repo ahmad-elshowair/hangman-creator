@@ -33,13 +33,14 @@ interface UseHangmanReturn {
 
   // Actions
   guessLetter: (letter: string) => void;
+  revealWord: () => void;
   nextWord: () => void;
   resetGame: () => void;
 }
 
 export function useHangman(
   words: string[],
-  maxMistakes: number
+  maxMistakes: number,
 ): UseHangmanReturn {
   const [state, setState] = useState<HangmanState>({
     currentWordIndex: 0,
@@ -62,7 +63,7 @@ export function useHangman(
 
   const wrongLetters = useMemo(() => {
     return Array.from(state.guessedLetters).filter(
-      (l) => !currentWord.includes(l)
+      (l) => !currentWord.includes(l),
     );
   }, [state.guessedLetters, currentWord]);
 
@@ -86,8 +87,7 @@ export function useHangman(
 
   const isWordLost = mistakes >= maxMistakes;
   const isWordFinished = isWordWon || isWordLost;
-  const isGameOver =
-    state.results.length === totalWords && totalWords > 0;
+  const isGameOver = state.results.length === totalWords && totalWords > 0;
 
   const wins = state.results.filter((r) => r === "win").length;
   const losses = state.results.filter((r) => r === "loss").length;
@@ -103,8 +103,27 @@ export function useHangman(
         guessedLetters: new Set(prev.guessedLetters).add(upper),
       }));
     },
-    [isWordFinished, state.guessedLetters]
+    [isWordFinished, state.guessedLetters],
   );
+
+  const revealWord = useCallback(() => {
+    if (isWordFinished) return;
+
+    setState((prev) => {
+      const newGuessed = new Set(prev.guessedLetters);
+      // Add all characters from the current word to guessed letters
+      const wordChars = currentWord.split("");
+      for (const char of wordChars) {
+        if (char !== " " && char !== "-") {
+          newGuessed.add(char);
+        }
+      }
+      return {
+        ...prev,
+        guessedLetters: newGuessed,
+      };
+    });
+  }, [isWordFinished, currentWord]);
 
   const nextWord = useCallback(() => {
     if (!isWordFinished) return;
@@ -143,6 +162,7 @@ export function useHangman(
     wins,
     losses,
     guessLetter,
+    revealWord,
     nextWord,
     resetGame,
   };

@@ -8,6 +8,7 @@ import {
   ArrowForward as NextIcon,
   Edit as EditIcon,
   EmojiEvents as TrophyIcon,
+  Visibility as RevealIcon,
 } from "@mui/icons-material";
 import { useHangman } from "@/hooks/useHangman";
 import { useGameStore } from "@/store/useGameStore";
@@ -74,6 +75,7 @@ function GameView({ config }: GameViewProps) {
     wins,
     losses,
     guessLetter,
+    revealWord,
     nextWord,
     resetGame,
   } = useHangman(config.words, config.maxMistakes);
@@ -168,12 +170,36 @@ function GameView({ config }: GameViewProps) {
           </Button>
         </Box>
       ) : (
-        <Keyboard
-          guessedLetters={guessedLetters}
-          correctLetters={correctLetters}
-          disabled={isWordFinished}
-          onGuess={guessLetter}
-        />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Keyboard
+            guessedLetters={guessedLetters}
+            correctLetters={correctLetters}
+            disabled={isWordFinished}
+            onGuess={guessLetter}
+          />
+          <Button
+            variant="text"
+            color="secondary"
+            onClick={revealWord}
+            startIcon={<RevealIcon />}
+            sx={{
+              mt: 3,
+              opacity: 0.7,
+              "&:hover": { opacity: 1 },
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
+              fontWeight: 600,
+            }}
+          >
+            Reveal Word
+          </Button>
+        </Box>
       )}
 
       {/* INLINE ANIMATION */}
