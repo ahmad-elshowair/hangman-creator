@@ -8,10 +8,15 @@ import {
   Box,
   Button,
   Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   IconButton,
   Paper,
   Skeleton,
   Slider,
+  Snackbar,
   TextField,
   Typography,
   Chip,
@@ -21,8 +26,11 @@ import {
   Delete as DeleteIcon,
   PlayArrow as PlayIcon,
   DeleteSweep as ClearIcon,
+  Share as ShareIcon,
+  ContentCopy as CopyIcon,
 } from "@mui/icons-material";
 import { gradients } from "@/constants/gradients";
+import { encodeGameConfig } from "@/utils/shareLink";
 
 
 export default function SetupContent() {
@@ -40,6 +48,9 @@ export default function SetupContent() {
   } = useGameStore();
 
   const [currentWord, setCurrentWord] = useState("");
+  const [shareDialogOpen, setShareDialogOpen] = useState(false);
+  const [shareUrl, setShareUrl] = useState("");
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -66,6 +77,30 @@ export default function SetupContent() {
   const handleClear = () => {
     clearConfig();
     setCurrentWord("");
+  };
+
+  const handleShare = () => {
+    const url = encodeGameConfig(words, maxMistakes);
+    setShareUrl(url);
+    setShareDialogOpen(true);
+  };
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setSnackbarOpen(true);
+    } catch {
+      // FALLBACK FOR OLDER BROWSERS
+      const textArea = document.createElement("textarea");
+      textArea.value = shareUrl;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textArea);
+      setSnackbarOpen(true);
+    }
+    // AUTO-CLOSE THE DIALOG AFTER COPYING
+    setShareDialogOpen(false);
   };
 
   if (!mounted) {
@@ -266,21 +301,22 @@ export default function SetupContent() {
       <Box
         sx={{
           display: "flex",
-          flexDirection: { xs: "column", sm: "row" },
-          gap: 2,
+          gap: 1.5,
         }}
       >
         <Button
           id="clear-btn"
           variant="outlined"
           color="error"
-          fullWidth
+          size="small"
           startIcon={<ClearIcon />}
           onClick={handleClear}
           disabled={words.length === 0}
           sx={{
-            borderRadius: 3,
-            py: 1.5,
+            borderRadius: 2,
+            py: 1,
+            px: 2,
+            fontSize: { xs: "0.8rem", sm: "0.85rem" },
             borderColor: "rgba(255, 82, 82, 0.3)",
             "&:hover": {
               borderColor: "error.main",
@@ -288,20 +324,107 @@ export default function SetupContent() {
             },
           }}
         >
-          Clear All
+          Clear
         </Button>
         <Button
           id="start-btn"
           variant="contained"
-          fullWidth
+          size="small"
           startIcon={<PlayIcon />}
           onClick={handleStart}
           disabled={words.length === 0}
-          sx={{ borderRadius: 3, py: 1.5 }}
+          sx={{
+            borderRadius: 2,
+            py: 1,
+            px: 3,
+            flex: 1,
+            fontSize: { xs: "0.8rem", sm: "0.85rem" },
+          }}
         >
-          Start Game ({words.length} word{words.length !== 1 ? "s" : ""})
+          Start ({words.length} word{words.length !== 1 ? "s" : ""})
+        </Button>
+        <Button
+          id="share-btn"
+          variant="outlined"
+          size="small"
+          startIcon={<ShareIcon />}
+          onClick={handleShare}
+          disabled={words.length === 0}
+          sx={{
+            borderRadius: 2,
+            py: 1,
+            px: 2,
+            fontSize: { xs: "0.8rem", sm: "0.85rem" },
+            borderColor: "rgba(0, 229, 255, 0.3)",
+            color: "secondary.main",
+            "&:hover": {
+              borderColor: "secondary.main",
+              background: "rgba(0, 229, 255, 0.08)",
+            },
+          }}
+        >
+          Share
         </Button>
       </Box>
+
+      {/* SHARE GAME DIALOG */}
+      <Dialog
+        open={shareDialogOpen}
+        onClose={() => setShareDialogOpen(false)}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle sx={{ fontWeight: 700 }}>Share This Game</DialogTitle>
+        <DialogContent>
+          <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+            Copy the link below and paste it into your slides, browser, or chat.
+            Students will see only the game — no word list.
+          </Typography>
+          <TextField
+            fullWidth
+            value={shareUrl}
+            slotProps={{
+              input: {
+                readOnly: true,
+                endAdornment: (
+                  <IconButton
+                    onClick={handleCopyLink}
+                    aria-label="Copy link to clipboard"
+                    sx={{ color: "secondary.main" }}
+                  >
+                    <CopyIcon />
+                  </IconButton>
+                ),
+              },
+            }}
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                fontFamily: "monospace",
+                fontSize: "0.85rem",
+              },
+            }}
+          />
+        </DialogContent>
+        <DialogActions sx={{ px: 3, pb: 2 }}>
+          <Button onClick={() => setShareDialogOpen(false)}>Close</Button>
+          <Button
+            variant="contained"
+            startIcon={<CopyIcon />}
+            onClick={handleCopyLink}
+          >
+            Copy Link
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* COPY CONFIRMATION SNACKBAR */}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={() => setSnackbarOpen(false)}
+        message="✅ Link copied to clipboard!"
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      />
     </Container>
   );
 }

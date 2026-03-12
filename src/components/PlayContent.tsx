@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useTheme } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 import { Box, Button, Container, Paper, Typography } from "@mui/material";
@@ -19,16 +19,41 @@ import GameSkeleton from "@/components/GameSkeleton";
 import GameSummary from "@/components/GameSummary";
 import GameProgress from "@/components/GameProgress";
 import GameStatus from "@/components/GameStatus";
+import { decodeGameConfig } from "@/utils/shareLink";
 
 export default function PlayContent() {
   const router = useRouter();
   const { words, maxMistakes, hasHydrated } = useGameStore();
 
-  if (!hasHydrated) {
+  // CHECK FOR A SHARED GAME CONFIG IN THE URL HASH
+  const [hashChecked, setHashChecked] = useState(false);
+  const sharedConfig = useMemo(() => {
+    if (typeof window === "undefined") return null;
+    return decodeGameConfig(window.location.hash);
+  }, []);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setHashChecked(true);
+  }, []);
+
+  // DETERMINE THE FINAL CONFIG: URL HASH TAKES PRIORITY OVER ZUSTAND STORE
+  const hasSharedConfig = sharedConfig !== null;
+  const finalWords = hasSharedConfig ? sharedConfig.words : words;
+  const finalMaxMistakes = hasSharedConfig
+    ? sharedConfig.maxMistakes
+    : maxMistakes;
+
+  // WAIT FOR HYDRATION (STORE) OR HASH CHECK
+  if (!hasSharedConfig && !hasHydrated) {
     return <GameSkeleton />;
   }
 
-  if (!words || words.length === 0) {
+  if (!hashChecked && !hasSharedConfig) {
+    return <GameSkeleton />;
+  }
+
+  if (!finalWords || finalWords.length === 0) {
     return (
       <Container maxWidth="sm" sx={{ py: 8, textAlign: "center" }}>
         <Typography variant="h5" sx={{ mb: 2 }}>
@@ -48,7 +73,7 @@ export default function PlayContent() {
     );
   }
 
-  return <GameView config={{ words, maxMistakes }} />;
+  return <GameView config={{ words: finalWords, maxMistakes: finalMaxMistakes }} />;
 }
 
 interface GameViewProps {
