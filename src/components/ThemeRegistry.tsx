@@ -17,10 +17,9 @@ function ThemeWrapper({ children }: { children: React.ReactNode }) {
   }, []);
 
   if (!mounted) {
-    // Return a hidden wrapper during SSR to avoid hydration mismatch
-    // or just the children if you don't mind a flash of unstyled content.
-    // For Material UI, it's safer to provide the default SSR theme (e.g. dark),
-    // but returning nothing until mounted perfectly prevents the icon/theme mismatch.
+    // RETURN A HIDDEN WRAPPER DURING SSR TO AVOID HYDRATION MISMATCH.
+    // FOR MATERIAL UI, IT'S SAFER TO PROVIDE THE DEFAULT SSR THEME (E.G. DARK),
+    // BUT RETURNING NOTHING UNTIL MOUNTED PERFECTLY PREVENTS THE ICON/THEME MISMATCH.
     return (
       <div style={{ visibility: "hidden" }}>
         <ThemeProvider theme={darkTheme}>

@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { Container, LinearProgress } from "@mui/material";
+import { gradients } from "@/constants/gradients";
 
 const PlayContent = dynamic(() => import("@/components/PlayContent"), {
   ssr: false,
@@ -11,7 +12,7 @@ const PlayContent = dynamic(() => import("@/components/PlayContent"), {
         sx={{
           borderRadius: 2,
           "& .MuiLinearProgress-bar": {
-            background: "linear-gradient(90deg, #7C4DFF, #00E5FF)",
+            background: gradients.progress,
           },
         }}
       />

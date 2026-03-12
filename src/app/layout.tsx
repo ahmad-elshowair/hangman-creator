@@ -15,6 +15,13 @@ export const metadata: Metadata = {
   title: "Hangman Game Creator",
   description:
     "Create custom Hangman games for your students. Set the number of allowed mistakes, add your word list, and play!",
+  openGraph: {
+    title: "Hangman Game Creator",
+    description:
+      "Create custom Hangman games for your students. Set the number of allowed mistakes, add your word list, and play!",
+    type: "website",
+    siteName: "Hangman Creator",
+  },
 };
 
 export default function RootLayout({

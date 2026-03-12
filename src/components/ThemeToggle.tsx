@@ -30,6 +30,7 @@ export default function ThemeToggle(props: IconButtonProps) {
       <IconButton
         id="theme-toggle-btn"
         onClick={toggleMode}
+        aria-label={`Switch to ${mode === "dark" ? "light" : "dark"} mode`}
         {...rest}
         sx={{
           width: { xs: 40, md: 44 },

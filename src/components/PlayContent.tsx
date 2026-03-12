@@ -202,13 +202,6 @@ function GameView({ config }: GameViewProps) {
         </Box>
       )}
 
-      {/* INLINE ANIMATION */}
-      <style>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(8px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
     </Container>
   );
 }

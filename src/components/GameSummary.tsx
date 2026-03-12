@@ -12,6 +12,7 @@ import {
   EmojiEvents as TrophyIcon,
 } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
+import { gradients } from "@/constants/gradients";
 
 interface GameSummaryProps {
   totalWords: number;
@@ -60,8 +61,8 @@ export default function GameSummary({
             fontWeight: 800,
             mb: 1,
             background: allCorrect
-              ? "linear-gradient(135deg, #69F0AE, #00E5FF)"
-              : "linear-gradient(135deg, #B388FF, #7C4DFF)",
+              ? gradients.success
+              : gradients.primary,
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",

@@ -3,6 +3,7 @@
 import { AppBar, Toolbar, Typography, Tooltip, Box } from "@mui/material";
 import { useRouter } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
+import { gradients } from "@/constants/gradients";
 
 export default function Header() {
   const router = useRouter();
@@ -22,6 +23,7 @@ export default function Header() {
           <Box
             component="button"
             onClick={() => router.push("/")}
+            aria-label="Navigate to home page"
             sx={{
               display: "flex",
               alignItems: "center",
@@ -43,8 +45,7 @@ export default function Header() {
               component="div"
               sx={{
                 fontWeight: 700,
-                background:
-                  "linear-gradient(135deg, #B388FF 0%, #7C4DFF 50%, #00E5FF 100%)",
+                background: gradients.brand,
                 backgroundClip: "text",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",

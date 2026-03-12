@@ -34,7 +34,7 @@ export default function WordDisplay({
         const isSpace = char === " ";
         const isHyphen = char === "-";
 
-        // On loss, show the missing letters in red
+        // ON LOSS, SHOW THE MISSING LETTERS IN RED
         const showMissed = isWordFinished && !isWordWon && char === "_";
         const displayChar = showMissed ? currentWord[i] : char;
 
@@ -87,7 +87,7 @@ export default function WordDisplay({
                   : "\u00A0"}
             </Typography>
 
-            {/* Underline for letters (not spaces or hyphens) */}
+            {/* UNDERLINE FOR LETTERS (NOT SPACES OR HYPHENS) */}
             {!isHyphen && (
               <Box
                 sx={{
@@ -110,18 +110,6 @@ export default function WordDisplay({
         );
       })}
 
-      {/* Animations */}
-      <style>{`
-        @keyframes popIn {
-          0% { transform: scale(0.5); opacity: 0; }
-          70% { transform: scale(1.1); }
-          100% { transform: scale(1); opacity: 1; }
-        }
-        @keyframes fadeInRed {
-          from { opacity: 0; transform: translateY(-8px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
     </Box>
   );
 }

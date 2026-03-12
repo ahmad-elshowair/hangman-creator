@@ -60,7 +60,7 @@ export default function Keyboard({
             : "0 6px 12px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.8)",
         },
         "&.Mui-disabled": {
-          // for when the whole keyboard is disabled across words
+          // FOR WHEN THE WHOLE KEYBOARD IS DISABLED ACROSS WORDS
           opacity: 0.5,
           color: theme.palette.text.primary,
         },
@@ -139,6 +139,7 @@ export default function Keyboard({
               size="small"
               disabled={disabled || guessedLetters.has(letter)}
               onClick={() => onGuess(letter)}
+              aria-label={`Guess letter ${letter}`}
               sx={{
                 minWidth: { xs: 36, sm: 48 },
                 height: { xs: 44, sm: 52 },

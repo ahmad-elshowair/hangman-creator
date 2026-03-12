@@ -51,12 +51,6 @@ export default function Footer() {
         </Link>
       </Typography>
 
-      <style>{`
-        @keyframes heartbeat {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.2); }
-        }
-      `}</style>
     </Box>
   );
 }

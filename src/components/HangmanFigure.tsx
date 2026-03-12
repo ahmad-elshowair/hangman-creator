@@ -8,7 +8,7 @@ interface HangmanFigureProps {
 }
 
 const BODY_PARTS = [
-  // 1. Head
+  // 1. HEAD
   <circle
     key="head"
     cx="150"
@@ -19,7 +19,7 @@ const BODY_PARTS = [
     strokeWidth="3"
     strokeLinecap="round"
   />,
-  // 2. Body
+  // 2. BODY
   <line
     key="body"
     x1="150"
@@ -30,7 +30,7 @@ const BODY_PARTS = [
     strokeWidth="3"
     strokeLinecap="round"
   />,
-  // 3. Left arm
+  // 3. LEFT ARM
   <line
     key="left-arm"
     x1="150"
@@ -41,7 +41,7 @@ const BODY_PARTS = [
     strokeWidth="3"
     strokeLinecap="round"
   />,
-  // 4. Right arm
+  // 4. RIGHT ARM
   <line
     key="right-arm"
     x1="150"
@@ -52,7 +52,7 @@ const BODY_PARTS = [
     strokeWidth="3"
     strokeLinecap="round"
   />,
-  // 5. Left leg
+  // 5. LEFT LEG
   <line
     key="left-leg"
     x1="150"
@@ -63,7 +63,7 @@ const BODY_PARTS = [
     strokeWidth="3"
     strokeLinecap="round"
   />,
-  // 6. Right leg
+  // 6. RIGHT LEG
   <line
     key="right-leg"
     x1="150"
@@ -74,7 +74,7 @@ const BODY_PARTS = [
     strokeWidth="3"
     strokeLinecap="round"
   />,
-  // 7. Left eye
+  // 7. LEFT EYE
   <line
     key="left-eye-1"
     x1="140"
@@ -84,7 +84,7 @@ const BODY_PARTS = [
     stroke="currentColor"
     strokeWidth="2"
   />,
-  // 7b. Left eye (X)
+  // 7B. LEFT EYE (X)
   <line
     key="left-eye-2"
     x1="145"
@@ -94,7 +94,7 @@ const BODY_PARTS = [
     stroke="currentColor"
     strokeWidth="2"
   />,
-  // 8. Right eye
+  // 8. RIGHT EYE
   <line
     key="right-eye-1"
     x1="155"
@@ -104,7 +104,7 @@ const BODY_PARTS = [
     stroke="currentColor"
     strokeWidth="2"
   />,
-  // 8b. Right eye (X)
+  // 8B. RIGHT EYE (X)
   <line
     key="right-eye-2"
     x1="160"
@@ -123,12 +123,12 @@ export default function HangmanFigure({
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
 
-  // Map mistakes to body parts based on maxMistakes
-  // This distributes the body parts evenly across the allowed mistakes
+  // MAP MISTAKES TO BODY PARTS BASED ON MAX MISTAKES
+  // THIS DISTRIBUTES THE BODY PARTS EVENLY ACROSS THE ALLOWED MISTAKES
   const totalParts = BODY_PARTS.length;
   const partsToShow = Math.min(
     totalParts,
-    Math.round((mistakes / maxMistakes) * totalParts)
+    Math.round((mistakes / maxMistakes) * totalParts),
   );
 
   return (
@@ -143,10 +143,13 @@ export default function HangmanFigure({
       <svg
         viewBox="0 0 250 220"
         width="100%"
+        role="img"
+        aria-label="Hangman figure"
         style={{ maxWidth: 280, color: isDark ? "#E8EAED" : "#1A1A2E" }}
       >
-        {/* Gallows */}
-        {/* Base */}
+        <title>Hangman figure</title>
+        {/* GALLOWS */}
+        {/* BASE */}
         <line
           x1="40"
           y1="200"
@@ -156,7 +159,7 @@ export default function HangmanFigure({
           strokeWidth="4"
           strokeLinecap="round"
         />
-        {/* Vertical pole */}
+        {/* VERTICAL POLE */}
         <line
           x1="80"
           y1="200"
@@ -166,7 +169,7 @@ export default function HangmanFigure({
           strokeWidth="4"
           strokeLinecap="round"
         />
-        {/* Horizontal beam */}
+        {/* HORIZONTAL BEAM */}
         <line
           x1="78"
           y1="20"
@@ -176,7 +179,7 @@ export default function HangmanFigure({
           strokeWidth="4"
           strokeLinecap="round"
         />
-        {/* Rope */}
+        {/* ROPE */}
         <line
           x1="150"
           y1="20"
@@ -187,12 +190,12 @@ export default function HangmanFigure({
           strokeLinecap="round"
         />
 
-        {/* Body parts with animation */}
+        {/* BODY PARTS WITH ANIMATION */}
         {BODY_PARTS.slice(0, partsToShow).map((part, i) => (
           <g
             key={i}
             style={{
-              animation: "fadeIn 0.4s ease-out forwards",
+              animation: "svgFadeIn 0.4s ease-out forwards",
               opacity: 0,
               animationDelay: "0.05s",
             }}
@@ -200,14 +203,6 @@ export default function HangmanFigure({
             {part}
           </g>
         ))}
-
-        {/* Global CSS for animation */}
-        <style>{`
-          @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
-          }
-        `}</style>
       </svg>
     </Box>
   );

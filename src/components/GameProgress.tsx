@@ -1,4 +1,5 @@
 import { Box, LinearProgress, Typography, useTheme } from "@mui/material";
+import { gradients } from "@/constants/gradients";
 
 interface GameProgressProps {
   currentWordIndex: number;
@@ -55,7 +56,7 @@ export default function GameProgress({
             : "rgba(0, 0, 0, 0.08)",
           "& .MuiLinearProgress-bar": {
             borderRadius: 3,
-            background: "linear-gradient(90deg, #7C4DFF, #00E5FF)",
+            background: gradients.progress,
           },
         }}
       />

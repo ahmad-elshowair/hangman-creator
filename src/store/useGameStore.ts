@@ -39,6 +39,10 @@ export const useGameStore = create<GameState>()(
     }),
     {
       name: "hangman-game-config",
+      partialize: (state) => ({
+        words: state.words,
+        maxMistakes: state.maxMistakes,
+      }),
       onRehydrateStorage: () => (state) => {
         state?.setHasHydrated(true);
       },

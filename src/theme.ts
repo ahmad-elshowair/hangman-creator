@@ -1,6 +1,7 @@
 "use client";
 
 import { createTheme, type Theme } from "@mui/material/styles";
+import { gradients } from "@/constants/gradients";
 
 const sharedTypography = {
   fontFamily: "var(--font-outfit), sans-serif",
@@ -26,10 +27,10 @@ const sharedComponents = {
         transition: "all 0.2s ease-in-out",
       },
       containedPrimary: {
-        background: "linear-gradient(135deg, #7C4DFF 0%, #651FFF 100%)",
+        background: gradients.button,
         boxShadow: "0 4px 20px rgba(124, 77, 255, 0.4)",
         "&:hover": {
-          background: "linear-gradient(135deg, #9E7CFF 0%, #7C4DFF 100%)",
+          background: gradients.buttonHover,
           boxShadow: "0 6px 28px rgba(124, 77, 255, 0.55)",
           transform: "translateY(-1px)",
         },

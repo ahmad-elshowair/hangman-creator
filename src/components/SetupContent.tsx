@@ -1,7 +1,7 @@
 "use client";
 
 import { useGameStore } from "@/store/useGameStore";
-import { useEffect, useState as useReactState } from "react";
+import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
 import {
@@ -10,6 +10,7 @@ import {
   Container,
   IconButton,
   Paper,
+  Skeleton,
   Slider,
   TextField,
   Typography,
@@ -21,12 +22,14 @@ import {
   PlayArrow as PlayIcon,
   DeleteSweep as ClearIcon,
 } from "@mui/icons-material";
+import { gradients } from "@/constants/gradients";
+
 
 export default function SetupContent() {
   const router = useRouter();
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
-  const [mounted, setMounted] = useReactState(false);
+  const [mounted, setMounted] = useState(false);
   const {
     words,
     maxMistakes,
@@ -36,12 +39,12 @@ export default function SetupContent() {
     clearConfig,
   } = useGameStore();
 
-  const [currentWord, setCurrentWord] = useReactState("");
+  const [currentWord, setCurrentWord] = useState("");
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
-  }, [setMounted]);
+  }, []);
 
   const handleAdd = () => {
     addWord(currentWord);
@@ -66,12 +69,30 @@ export default function SetupContent() {
   };
 
   if (!mounted) {
-    return null; // or a loading skeleton
+    return (
+      <Container maxWidth="sm" sx={{ py: { xs: 4, md: 6 } }}>
+        {/* SETUP SKELETON */}
+        <Box sx={{ textAlign: "center", mb: 5 }}>
+          <Skeleton variant="text" width="60%" height={50} sx={{ mx: "auto" }} />
+          <Skeleton variant="text" width="80%" height={24} sx={{ mx: "auto", mt: 1 }} />
+        </Box>
+        <Paper elevation={0} sx={{ p: { xs: 2.5, md: 4 }, mb: 3 }}>
+          <Skeleton variant="text" width="50%" height={32} sx={{ mb: 2 }} />
+          <Skeleton variant="rounded" width="100%" height={40} sx={{ mb: 4, borderRadius: 2 }} />
+          <Skeleton variant="text" width="30%" height={32} sx={{ mb: 2 }} />
+          <Skeleton variant="rounded" width="100%" height={40} sx={{ borderRadius: 2 }} />
+        </Paper>
+        <Box sx={{ display: "flex", gap: 2 }}>
+          <Skeleton variant="rounded" width="50%" height={48} sx={{ borderRadius: 3 }} />
+          <Skeleton variant="rounded" width="50%" height={48} sx={{ borderRadius: 3 }} />
+        </Box>
+      </Container>
+    );
   }
 
   return (
     <Container maxWidth="sm" sx={{ py: { xs: 4, md: 6 } }}>
-      {/* Header */}
+      {/* HEADER */}
       <Box sx={{ textAlign: "center", mb: 5 }}>
         <Typography
           variant="h3"
@@ -79,8 +100,7 @@ export default function SetupContent() {
           sx={{
             fontWeight: 800,
             fontSize: { xs: "2.2rem", md: "3rem" },
-            background:
-              "linear-gradient(135deg, #B388FF 0%, #7C4DFF 50%, #00E5FF 100%)",
+            background: gradients.brand,
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
@@ -94,7 +114,7 @@ export default function SetupContent() {
         </Typography>
       </Box>
 
-      {/* Settings Card */}
+      {/* SETTINGS CARD */}
       <Paper
         elevation={0}
         sx={{
@@ -103,7 +123,7 @@ export default function SetupContent() {
           background: isDark ? "rgba(18, 24, 48, 0.7)" : undefined,
         }}
       >
-        {/* Max Mistakes */}
+        {/* MAX MISTAKES */}
         <Typography variant="h6" sx={{ mb: 2 }}>
           Max Mistakes Allowed
         </Typography>
@@ -119,11 +139,11 @@ export default function SetupContent() {
             sx={{
               flex: 1,
               "& .MuiSlider-thumb": {
-                background: "linear-gradient(135deg, #7C4DFF, #B388FF)",
+                background: gradients.brandReverse,
                 boxShadow: "0 0 12px rgba(124, 77, 255, 0.5)",
               },
               "& .MuiSlider-track": {
-                background: "linear-gradient(90deg, #7C4DFF, #00E5FF)",
+                background: gradients.progress,
                 border: "none",
               },
             }}
@@ -140,7 +160,7 @@ export default function SetupContent() {
           />
         </Box>
 
-        {/* Word Input */}
+        {/* WORD INPUT */}
         <Typography variant="h6" sx={{ mb: 2 }}>
           Word List
         </Typography>
@@ -166,7 +186,7 @@ export default function SetupContent() {
           </Button>
         </Box>
 
-        {/* Word List */}
+        {/* WORD LIST */}
         {words.length > 0 && (
           <Box sx={{ mb: 2 }}>
             <Typography
@@ -198,11 +218,11 @@ export default function SetupContent() {
                   : "1px solid rgba(0, 0, 0, 0.06)",
               }}
             >
-              {words.map((word, i) => (
+              {words.map((word) => (
                 <Chip
-                  key={i}
+                  key={word}
                   label={word}
-                  onDelete={() => removeWord(i)}
+                  onDelete={() => removeWord(words.indexOf(word))}
                   deleteIcon={
                     <IconButton size="small" sx={{ color: "error.main" }}>
                       <DeleteIcon fontSize="small" />
@@ -242,7 +262,7 @@ export default function SetupContent() {
         )}
       </Paper>
 
-      {/* Action Buttons */}
+      {/* ACTION BUTTONS */}
       <Box
         sx={{
           display: "flex",

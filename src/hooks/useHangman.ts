@@ -9,7 +9,7 @@ interface HangmanState {
 }
 
 interface UseHangmanReturn {
-  // Current word state
+  // CURRENT WORD STATE
   currentWord: string;
   currentWordIndex: number;
   totalWords: number;
@@ -20,18 +20,18 @@ interface UseHangmanReturn {
   mistakes: number;
   maxMistakes: number;
 
-  // Status
+  // STATUS
   isWordWon: boolean;
   isWordLost: boolean;
   isWordFinished: boolean;
   isGameOver: boolean;
 
-  // Results
+  // RESULTS
   results: ("win" | "loss")[];
   wins: number;
   losses: number;
 
-  // Actions
+  // ACTIONS
   guessLetter: (letter: string) => void;
   revealWord: () => void;
   nextWord: () => void;
@@ -111,7 +111,7 @@ export function useHangman(
 
     setState((prev) => {
       const newGuessed = new Set(prev.guessedLetters);
-      // Add all characters from the current word to guessed letters
+      // ADD ALL CHARACTERS FROM THE CURRENT WORD TO GUESSED LETTERS
       const wordChars = currentWord.split("");
       for (const char of wordChars) {
         if (char !== " " && char !== "-") {
