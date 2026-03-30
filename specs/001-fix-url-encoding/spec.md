@@ -5,6 +5,10 @@
 **Status**: Draft  
 **Input**: User description: "Fix shareable links breaking due to URL encoding"
 
+## Clarifications
+
+### Session 2026-03-30
+- Q: Backward Compatibility Protocol -> A: Auto-Redirect: Immediately rewrite the browser URL to cleanly use the new `?config=` pattern so they are migrated natively.
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Share robust links without corruption (Priority: P1)
@@ -33,7 +37,7 @@ As a teacher, I want to create a Hangman game and share the link via any messagi
 - **FR-001**: System MUST encode the game configuration using URL-Safe Base64 (replacing `+` with `-` and `/` with `_`, stripping `=`).
 - **FR-002**: System MUST parse incoming configurations from the URL query parameters (`?config=`) resiliently.
 - **FR-003**: System MUST NOT attach or validate any expiration timestamp to the payload. Links must be permanently valid.
-- **FR-004**: System MUST maintain backward compatibility so that previously correctly formatted Base64 links still work.
+- **FR-004**: System MUST maintain backward compatibility for old `#config=` hash links by auto-redirecting the user to the new normalized `?config=` pattern upon initial load.
 
 ## Success Criteria *(mandatory)*
 
