@@ -20,23 +20,30 @@ export function encodeGameConfig(
   const compact: CompactConfig = { w: words, m: maxMistakes };
   const json = JSON.stringify(compact);
   const base64 = btoa(encodeURIComponent(json));
+  const urlSafeBase64 = base64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
+  
   const origin =
     typeof window !== "undefined" ? window.location.origin : "";
-  return `${origin}${basePath}/play#config=${base64}`;
+  return `${origin}${basePath}/play?config=${urlSafeBase64}`;
 }
 
 /**
- * DECODES A GAME CONFIGURATION FROM A URL HASH FRAGMENT.
- * RETURNS NULL IF THE HASH IS MISSING, INVALID, OR CORRUPTED.
+ * DECODES A GAME CONFIGURATION FROM A BASE64URL PAYLOAD.
+ * RETURNS NULL IF THE PAYLOAD IS MISSING, INVALID, OR CORRUPTED.
  */
 export function decodeGameConfig(
-  hash: string,
+  payload: string,
 ): { words: string[]; maxMistakes: number } | null {
   try {
-    if (!hash || !hash.includes("config=")) return null;
+    if (!payload) return null;
 
-    const base64 = hash.split("config=")[1];
-    if (!base64) return null;
+    // Remove any accidental 'config=' prefixes just in case it wasn't stripped
+    const rawData = payload.includes("config=") ? payload.split("config=")[1] : payload;
+    if (!rawData) return null;
+
+    // Convert URL-safe Base64URL back to standard Base64
+    // Also replace spaces with '+' to catch links corrupted by messaging wrappers
+    const base64 = rawData.replace(/-/g, "+").replace(/_/g, "/").replace(/ /g, "+");
 
     const json = decodeURIComponent(atob(base64));
     const parsed: CompactConfig = JSON.parse(json);
@@ -60,4 +67,12 @@ export function decodeGameConfig(
   } catch {
     return null;
   }
+}
+
+/**
+ * DETECTS AND EXTRACTS A LEGACY URL HASH `#config=` FOR BACKWARD COMPATIBILITY MIGRATION.
+ */
+export function extractLegacyHashConfig(hash: string): string | null {
+  if (!hash || !hash.includes("#config=")) return null;
+  return hash.split("#config=")[1] || null;
 }

@@ -8,9 +8,9 @@
 ## Phase 1: Foundational Setup
 *Tasks that block all subsequent user stories.*
 
-- [ ] T001 Update `encodeGameConfig` in `src/utils/shareLink.ts` to replace `+` with `-` and `/` with `_`, stripping `=` padding.
-- [ ] T002 Update `decodeGameConfig` in `src/utils/shareLink.ts` to reverse the URL-safe mapping before parsing.
-- [ ] T003 Create `extractLegacyHashConfig()` helper in `src/utils/shareLink.ts` to gracefully parse out old `#config=` structures natively.
+- [x] T001 Update `encodeGameConfig` in `src/utils/shareLink.ts` to replace `+` with `-` and `/` with `_`, stripping `=` padding.
+- [x] T002 Update `decodeGameConfig` in `src/utils/shareLink.ts` to reverse the URL-safe mapping before parsing.
+- [x] T003 Create `extractLegacyHashConfig()` helper in `src/utils/shareLink.ts` to gracefully parse out old `#config=` structures natively.
 
 ## Phase 2: User Story 1 - Share robust links without corruption (P1)
 *Goal: Ensure users can reliably share link configurations indefinitely.*
