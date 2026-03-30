@@ -16,9 +16,9 @@
 *Goal: Ensure users can reliably share link configurations indefinitely.*
 *Independent test criteria: Generating a link yields `?config=...` and old `#config` links properly redirect to `?config` mode without crashing.*
 
-- [ ] T004 [US1] Wrap `PlayContent` export inside `src/app/play/page.tsx` with a `<Suspense>` boundary to fulfill Next.js `useSearchParams` requirements.
-- [ ] T005 [US1] Transition `PlayContent.tsx` inside `src/components/PlayContent.tsx` to import and utilize `useSearchParams()` from `next/navigation` to decode payloads.
-- [ ] T006 [US1] Add a `useEffect` inside `src/components/PlayContent.tsx` to detect legacy `#config=` URLs, parse them via the new helper, and trigger `router.replace` mapping to the new `?config=` pattern.
+- [x] T004 [US1] Wrap `PlayContent` export inside `src/app/play/page.tsx` with a `<Suspense>` boundary to fulfill Next.js `useSearchParams` requirements.
+- [x] T005 [US1] Transition `PlayContent.tsx` inside `src/components/PlayContent.tsx` to import and utilize `useSearchParams()` from `next/navigation` to decode payloads.
+- [x] T006 [US1] Add a `useEffect` inside `src/components/PlayContent.tsx` to detect legacy `#config=` URLs, parse them via the new helper, and trigger `router.replace` mapping to the new `?config=` pattern.
 
 ## Phase 3: Polish & Cross-Cutting Concerns
 

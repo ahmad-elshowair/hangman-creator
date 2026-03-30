@@ -1,5 +1,7 @@
 "use client";
 
+import { Suspense } from "react";
+
 import dynamic from "next/dynamic";
 import { Container, LinearProgress } from "@mui/material";
 import { gradients } from "@/constants/gradients";
@@ -21,5 +23,9 @@ const PlayContent = dynamic(() => import("@/components/PlayContent"), {
 });
 
 export default function PlayPage() {
-  return <PlayContent />;
+  return (
+    <Suspense fallback={null}>
+      <PlayContent />
+    </Suspense>
+  );
 }
