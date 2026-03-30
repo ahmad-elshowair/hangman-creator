@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useMemo } from "react";
 import { useTheme } from "@mui/material/styles";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Box, Button, Container, Paper, Typography } from "@mui/material";
 import {
   ArrowForward as NextIcon,
@@ -19,23 +19,37 @@ import GameSkeleton from "@/components/GameSkeleton";
 import GameSummary from "@/components/GameSummary";
 import GameProgress from "@/components/GameProgress";
 import GameStatus from "@/components/GameStatus";
-import { decodeGameConfig } from "@/utils/shareLink";
+import { decodeGameConfig, extractLegacyHashConfig } from "@/utils/shareLink";
 
 export default function PlayContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { words, maxMistakes, hasHydrated } = useGameStore();
 
-  // CHECK FOR A SHARED GAME CONFIG IN THE URL HASH
+  // BACKWARD COMPATIBILITY & URL STATE INITIALIZATION
   const [hashChecked, setHashChecked] = useState(false);
-  const sharedConfig = useMemo(() => {
-    if (typeof window === "undefined") return null;
-    return decodeGameConfig(window.location.hash);
-  }, []);
-
+  
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const hash = window.location.hash;
+      const legacyPayload = extractLegacyHashConfig(hash);
+      
+      if (legacyPayload) {
+        // Auto-Redirect out of legacy hash logic into clean params
+        router.replace(`?config=${legacyPayload}`);
+        return;
+      }
+    }
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setHashChecked(true);
-  }, []);
+  }, [router]);
+
+  // PARSE THE CURRENT SEARCH PARAMETERS
+  const sharedConfig = useMemo(() => {
+    const configParam = searchParams.get("config");
+    if (!configParam) return null;
+    return decodeGameConfig(configParam);
+  }, [searchParams]);
 
   // DETERMINE THE FINAL CONFIG: URL HASH TAKES PRIORITY OVER ZUSTAND STORE
   const hasSharedConfig = sharedConfig !== null;
