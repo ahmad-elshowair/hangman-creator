@@ -1,50 +1,53 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+[Sync Impact Report]
+Version change: 0.0.0 -> 1.0.0 (Initial Ratification)
+Modified principles: N/A - Initial Creation
+Added sections:
+- Core Principles (Component & Logic Separation, State Management & Hydration Safety, Stateless & URL-Safe Sharing, Strong Typing, Theming & Accessibility)
+- Technology Stack Constraints
+- Development Workflow
+Removed sections: N/A
+Templates requiring updates: 
+- ✅ speckit templates align natively.
+Follow-up TODOs: 
+- Proceed with /speckit.specify for the shareable link correction.
+-->
+# Hangman Creator Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Component & Logic Separation
+UI components must strictly focus on presentation and user interaction. All complex game rules, scorekeeping, and data handling must be isolated in discrete, testable custom hooks (e.g., `useHangman`).
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. State Management & Hydration Safety
+Global, persistent state is managed via `Zustand`. To prevent Next.js SSR hydration mismatches, any component consuming persistent local storage state must explicitly wait for a `hasHydrated` flag before rendering dependent UI elements.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Stateless & URL-Safe Sharing
+Game configurations shared via links must remain fully stateless and embedded entirely in the URL search parameters (`?config=`). Data encoding MUST use Base64URL formatting (replacing `+` with `-`, `/` with `_`, and omitting `=`) to prevent corruption in third-party messaging apps. Configured share links do strictly **not expire**.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Strong Typing
+TypeScript is absolutely mandatory. All component props, Zustand state slices, hooks, and utility payloads must have explicitly defined interfaces. `any` types are strictly prohibited.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Theming & Accessibility
+All UI architecture must be constructed utilizing Material-UI (MUI v7). The project must fully support responsive screen layouts and enforce a unified Light/Dark mode, with the user's preference gracefully persisting across sessions.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Technology Stack Constraints
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+The following core technologies are the established foundations of this project:
+- **Framework**: Next.js 16 (App Router)
+- **UI Library**: React 19 + MUI v7 (with Emotion)
+- **State Management**: Zustand
+- **Language**: TypeScript (Strict Mode)
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+Introducing new major paradigm tools (e.g., Redux, Tailwind CSS, heavy GraphQL clients) is prohibited without explicit amendment of this constitution.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Development Workflow
+
+Feature development must utilize a Spec-Driven Development approach via the `Speckit` agent skills (`/speckit.specify`, `/speckit.plan`, `/speckit.tasks`, `/speckit.implement`). 
+Before any heavy implementation begins, feature intent, success criteria, and technical architecture must be drafted and approved.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This Constitution supersedes all ad-hoc architectural decisions and personal preferences. Any fundamental shift in state management, data persistence, or framework boundaries requires formally amending this document first. All feature implementation plans must explicitly verify alignment with the Principles outlined above.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.1 | **Ratified**: 2026-03-30 | **Last Amended**: 2026-03-30
