@@ -12,9 +12,9 @@
 ## Phase 2: Foundational Design Tokens
 *Establishing the new Academy Garden palette in the core configuration.*
 
-- [ ] T003 [P] Update `src/constants/gradients.ts` with Emerald and Teal gradient tokens per design spec.
-- [ ] T004 [P] Update `src/theme.ts` palettes (Primary, Secondary, Background) for both Light and Dark modes.
-- [ ] T005 Update MUI component overrides in `src/theme.ts` for MuiButton shadows and MuiTextField focus states using the new primary emerald shadow.
+- [x] T003 [P] Update `src/constants/gradients.ts` with Emerald and Teal gradient tokens per design spec.
+- [x] T004 [P] Update `src/theme.ts` palettes (Primary, Secondary, Background) for both Light and Dark modes.
+- [x] T005 Update MUI component overrides in `src/theme.ts` for MuiButton shadows and MuiTextField focus states using the new primary emerald shadow.
 
 ## Phase 3: User Story 1 - Nature & Growth Identity (P1)
 *Applying the theme to active components and UI flows.*
