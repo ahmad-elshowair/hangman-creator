@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, useMemo } from "react";
-import { useTheme } from "@mui/material/styles";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Box, Button, Container, Paper, Typography } from "@mui/material";
 import {
@@ -95,8 +94,6 @@ interface GameViewProps {
 }
 
 function GameView({ config }: GameViewProps) {
-  const theme = useTheme();
-  const isDark = theme.palette.mode === "dark";
   const {
     currentWord,
     currentWordIndex,
@@ -161,7 +158,6 @@ function GameView({ config }: GameViewProps) {
         sx={{
           p: 2,
           mb: 2,
-          background: isDark ? "rgba(15, 26, 20, 0.5)" : undefined,
         }}
       >
         <HangmanFigure mistakes={mistakes} maxMistakes={maxMistakes} />

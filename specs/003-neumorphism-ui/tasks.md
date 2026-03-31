@@ -69,13 +69,13 @@
 
 ### Implementation for User Story 2
 
-- [ ] T016 [US2] Refactor `src/components/Keyboard.tsx` — replace `glassBase` (backdropFilter + border) system with `neuShadows` tokens. Default key: raisedSmall. Hover: flat. Transition: `neuShadows.transition`.
-- [ ] T017 [US2] Update `src/components/Keyboard.tsx` correct-guess state — replace green glass background with `neuShadows.correctInset` (green-tinted inset shadow).
-- [ ] T018 [US2] Update `src/components/Keyboard.tsx` wrong-guess state — replace transparent/flat style with `neuShadows.wrongInset` (red-tinted inset shadow) and reduced opacity.
-- [ ] T019 [US2] Audit `src/components/PlayContent.tsx` — remove the hardcoded `background: isDark ? "rgba(15, 26, 20, 0.5)" : undefined` from the hangman figure Paper. Theme override now handles it.
-- [ ] T020 [P] [US2] Audit `src/components/GameSummary.tsx` — remove the hardcoded `background: isDark ? "rgba(15, 26, 20, 0.7)" : undefined` from the summary Paper. Theme override now handles it.
-- [ ] T021 [P] [US2] Audit `src/components/GameSkeleton.tsx` — verify skeleton Paper inherits neumorphic shadows from theme (no inline overrides needed).
-- [ ] T022 [US2] Visual check — load Play page in both Light and Dark modes. Confirm keys raised, correct=green inset, wrong=red inset, hangman panel raised. Transitions smooth at ~200ms.
+- [x] T016 [US2] Refactor `src/components/Keyboard.tsx` — replace `glassBase` (backdropFilter + border) system with `neuShadows` tokens. Default key: raisedSmall. Hover: flat. Transition: `neuShadows.transition`.
+- [x] T017 [US2] Update `src/components/Keyboard.tsx` correct-guess state — replace green glass background with `neuShadows.correctInset` (green-tinted inset shadow).
+- [x] T018 [US2] Update `src/components/Keyboard.tsx` wrong-guess state — replace transparent/flat style with `neuShadows.wrongInset` (red-tinted inset shadow) and reduced opacity.
+- [x] T019 [US2] Audit `src/components/PlayContent.tsx` — remove the hardcoded `background: isDark ? "rgba(15, 26, 20, 0.5)" : undefined` from the hangman figure Paper. Theme override now handles it.
+- [x] T020 [P] [US2] Audit `src/components/GameSummary.tsx` — remove the hardcoded `background: isDark ? "rgba(15, 26, 20, 0.7)" : undefined` from the summary Paper. Theme override now handles it.
+- [x] T021 [P] [US2] Audit `src/components/GameSkeleton.tsx` — verify skeleton Paper inherits neumorphic shadows from theme (no inline overrides needed).
+- [x] T022 [US2] Visual check — load Play page in both Light and Dark modes. Confirm keys raised, correct=green inset, wrong=red inset, hangman panel raised. Transitions smooth at ~200ms.
 
 **Checkpoint**: Play page fully neumorphic. Both stories independently verifiable.
 

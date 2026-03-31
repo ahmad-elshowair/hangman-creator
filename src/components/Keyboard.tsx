@@ -1,6 +1,7 @@
 "use client";
 
 import { Box, Button, useTheme } from "@mui/material";
+import { neuShadows } from "@/constants/neumorphism";
 
 interface KeyboardProps {
   guessedLetters: Set<string>;
@@ -24,43 +25,26 @@ export default function Keyboard({
   const theme = useTheme();
 
   const isDark = theme.palette.mode === "dark";
+  const neu = isDark ? neuShadows.dark : neuShadows.light;
 
   const getKeyStyles = (letter: string) => {
     const guessed = guessedLetters.has(letter);
     const correct = correctLetters.has(letter);
 
-    const glassBase = {
-      backdropFilter: "blur(12px)",
-      WebkitBackdropFilter: "blur(12px)",
-    };
-
     if (!guessed) {
       return {
-        ...glassBase,
-        background: isDark
-          ? "rgba(255, 255, 255, 0.05)"
-          : "rgba(255, 255, 255, 0.6)",
-        border: isDark
-          ? "1px solid rgba(255, 255, 255, 0.15)"
-          : "1px solid rgba(255, 255, 255, 0.8)",
+        background: "inherit",
+        border: "none",
         color: theme.palette.text.primary,
-        boxShadow: isDark
-          ? "0 4px 6px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1)"
-          : "0 4px 6px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.6)",
+        boxShadow: neu.raisedSmall,
         "&:hover": {
-          background: isDark
-            ? "rgba(255, 255, 255, 0.12)"
-            : "rgba(255, 255, 255, 0.9)",
-          border: isDark
-            ? "1px solid rgba(255, 255, 255, 0.3)"
-            : "1px solid rgba(255, 255, 255, 1)",
-          transform: "translateY(-2px)",
-          boxShadow: isDark
-            ? "0 6px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2)"
-            : "0 6px 12px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.8)",
+          boxShadow: neu.flat,
+          transform: "translateY(-1px)",
+        },
+        "&:active": {
+          boxShadow: neu.inset,
         },
         "&.Mui-disabled": {
-          // FOR WHEN THE WHOLE KEYBOARD IS DISABLED ACROSS WORDS
           opacity: 0.5,
           color: theme.palette.text.primary,
         },
@@ -71,43 +55,33 @@ export default function Keyboard({
       const successColor = isDark
         ? theme.palette.success.main
         : theme.palette.success.dark;
-      const successBorder = `1px solid ${theme.palette.success.main}`;
       return {
-        ...glassBase,
         background: isDark
-          ? "rgba(105, 240, 174, 0.15)"
-          : "rgba(105, 240, 174, 0.4)",
-        border: successBorder,
+          ? "rgba(46, 125, 50, 0.15)"
+          : "rgba(46, 125, 50, 0.1)",
+        border: "none",
         color: successColor,
-        boxShadow: `0 0 15px ${theme.palette.success.main}40`,
-        transform: "scale(0.95)", // subtly shrink correct guessed letters
+        boxShadow: neuShadows.correctInset,
+        transform: "scale(0.96)",
         "&.Mui-disabled": {
-          background: isDark
-            ? "rgba(105, 240, 174, 0.15)"
-            : "rgba(105, 240, 174, 0.4)",
           color: successColor,
-          border: successBorder,
         },
       };
     }
 
     const errorColor = theme.palette.error.main;
-    const errorBorder = "none";
-    const errorBg = "transparent";
     const errorText = isDark ? "#ffb4ab" : errorColor;
 
     return {
-      ...glassBase,
-      background: errorBg,
-      border: errorBorder,
+      background: "transparent",
+      border: "none",
       color: errorText,
-      opacity: 0.9,
-      transform: "scale(0.95)",
+      boxShadow: neuShadows.wrongInset,
+      opacity: 0.7,
+      transform: "scale(0.96)",
       "&.Mui-disabled": {
-        background: errorBg,
         color: errorText,
-        border: errorBorder,
-        opacity: 0.9,
+        opacity: 0.7,
       },
     };
   };
@@ -147,7 +121,7 @@ export default function Keyboard({
                 fontWeight: 700,
                 borderRadius: 2.5,
                 p: 0,
-                transition: "all 0.25s cubic-bezier(0.4, 0, 0.2, 1)",
+                transition: neuShadows.transition,
                 ...getKeyStyles(letter),
               }}
             >
