@@ -34,7 +34,7 @@ export default function Header() {
               flexGrow: 1,
               textAlign: "left",
               "&:focus-visible": {
-                outline: "2px solid #7C4DFF",
+                outline: "2px solid #2E7D32",
                 outlineOffset: 4,
                 borderRadius: 1,
               },

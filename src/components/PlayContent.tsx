@@ -161,7 +161,7 @@ function GameView({ config }: GameViewProps) {
         sx={{
           p: 2,
           mb: 2,
-          background: isDark ? "rgba(18, 24, 48, 0.5)" : undefined,
+          background: isDark ? "rgba(15, 26, 20, 0.5)" : undefined,
         }}
       >
         <HangmanFigure mistakes={mistakes} maxMistakes={maxMistakes} />

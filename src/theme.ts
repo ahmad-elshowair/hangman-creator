@@ -28,10 +28,10 @@ const sharedComponents = {
       },
       containedPrimary: {
         background: gradients.button,
-        boxShadow: "0 4px 20px rgba(124, 77, 255, 0.4)",
+        boxShadow: "0 4px 20px rgba(46, 125, 50, 0.4)",
         "&:hover": {
           background: gradients.buttonHover,
-          boxShadow: "0 6px 28px rgba(124, 77, 255, 0.55)",
+          boxShadow: "0 6px 28px rgba(46, 125, 50, 0.55)",
           transform: "translateY(-1px)",
         },
       },
@@ -43,7 +43,7 @@ const sharedComponents = {
         "& .MuiOutlinedInput-root": {
           borderRadius: 12,
           "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#7C4DFF",
+            borderColor: "#2E7D32",
           },
         },
       },
@@ -54,11 +54,11 @@ const sharedComponents = {
 export const darkTheme: Theme = createTheme({
   palette: {
     mode: "dark",
-    primary: { main: "#7C4DFF", light: "#B388FF", dark: "#651FFF" },
-    secondary: { main: "#00E5FF", light: "#6EFFFF", dark: "#00B8D4" },
+    primary: { main: "#66BB6A", light: "#81C784", dark: "#2E7D32" },
+    secondary: { main: "#4DB6AC", light: "#80CBC4", dark: "#0097A7" },
     success: { main: "#69F0AE", light: "#B9F6CA", dark: "#00C853" },
     error: { main: "#FF5252", light: "#FF8A80", dark: "#D50000" },
-    background: { default: "#0A0E1A", paper: "rgba(18, 24, 48, 0.85)" },
+    background: { default: "#0F1A14", paper: "rgba(15, 26, 20, 0.85)" },
     text: { primary: "#E8EAED", secondary: "#9AA0A6" },
   },
   typography: sharedTypography,
@@ -80,7 +80,7 @@ export const darkTheme: Theme = createTheme({
           borderRadius: 20,
           backdropFilter: "blur(16px)",
           border: "1px solid rgba(255, 255, 255, 0.06)",
-          background: "rgba(18, 24, 48, 0.7)",
+          background: "rgba(15, 26, 20, 0.7)",
         },
       },
     },
@@ -90,11 +90,11 @@ export const darkTheme: Theme = createTheme({
 export const lightTheme: Theme = createTheme({
   palette: {
     mode: "light",
-    primary: { main: "#5E35B1", light: "#7E57C2", dark: "#4527A0" },
-    secondary: { main: "#0097A7", light: "#00BCD4", dark: "#006064" },
+    primary: { main: "#2E7D32", light: "#81C784", dark: "#1B5E20" },
+    secondary: { main: "#0097A7", light: "#4DB6AC", dark: "#006064" },
     success: { main: "#2E7D32", light: "#4CAF50", dark: "#1B5E20" },
     error: { main: "#D32F2F", light: "#EF5350", dark: "#B71C1C" },
-    background: { default: "#F5F3FF", paper: "#FFFFFF" },
+    background: { default: "#F0F4F2", paper: "#FFFFFF" },
     text: { primary: "#1A1A2E", secondary: "#5A5A7A" },
   },
   typography: sharedTypography,

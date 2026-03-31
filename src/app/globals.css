@@ -20,7 +20,7 @@ html {
 
 /* SELECTION COLOR */
 ::selection {
-  background: rgba(124, 77, 255, 0.35);
+  background: rgba(46, 125, 50, 0.35);
   color: #fff;
 }
 

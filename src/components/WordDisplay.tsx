@@ -98,7 +98,7 @@ export default function WordDisplay({
                   background: showMissed
                     ? "linear-gradient(90deg, #FF5252, #FF8A80)"
                     : isRevealed
-                      ? "linear-gradient(90deg, #7C4DFF, #B388FF)"
+                      ? "linear-gradient(90deg, #2E7D32, #81C784)"
                       : isDark
                         ? "rgba(255, 255, 255, 0.2)"
                         : "rgba(0, 0, 0, 0.25)",

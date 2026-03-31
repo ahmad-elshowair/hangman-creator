@@ -155,7 +155,7 @@ export default function HangmanFigure({
           y1="200"
           x2="200"
           y2="200"
-          stroke="rgba(124, 77, 255, 0.5)"
+          stroke="rgba(46, 125, 50, 0.5)"
           strokeWidth="4"
           strokeLinecap="round"
         />
@@ -165,7 +165,7 @@ export default function HangmanFigure({
           y1="200"
           x2="80"
           y2="20"
-          stroke="rgba(124, 77, 255, 0.5)"
+          stroke="rgba(46, 125, 50, 0.5)"
           strokeWidth="4"
           strokeLinecap="round"
         />
@@ -175,7 +175,7 @@ export default function HangmanFigure({
           y1="20"
           x2="150"
           y2="20"
-          stroke="rgba(124, 77, 255, 0.5)"
+          stroke="rgba(46, 125, 50, 0.5)"
           strokeWidth="4"
           strokeLinecap="round"
         />
@@ -185,7 +185,7 @@ export default function HangmanFigure({
           y1="20"
           x2="150"
           y2="50"
-          stroke="rgba(0, 229, 255, 0.6)"
+          stroke="rgba(0, 151, 167, 0.6)"
           strokeWidth="3"
           strokeLinecap="round"
         />
