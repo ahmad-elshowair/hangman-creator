@@ -26,9 +26,9 @@
 ## Phase 4: Polish & Final Verification
 *Ensuring a high-quality finish for student eyes.*
 
-- [ ] T009 [US1] Perform a visual high-contrast check on the soft mint background (`#F0F4F2`).
-- [ ] T010 [US1] Verify that Emerald active states in Dark Mode meet WCAG AA standards.
-- [ ] T011 Final "Daylight" smoke test on dev server to confirm no lingering purple fragments remain and that the `#F0F4F2` Soft Mint background is rendering correctly.
+- [x] T009 [US1] Perform a visual high-contrast check on the soft mint background (`#F0F4F2`).
+- [x] T010 [US1] Verify that Emerald active states in Dark Mode meet WCAG AA standards.
+- [x] T011 Final "Daylight" smoke test on dev server to confirm no lingering purple fragments remain and that the `#F0F4F2` Soft Mint background is rendering correctly.
 ---
 
 ## Technical Dependencies

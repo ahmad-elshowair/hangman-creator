@@ -58,7 +58,7 @@ export default function ThemeToggle(props: IconButtonProps) {
         {mode === "dark" ? (
           <LightIcon sx={{ color: "#FFD54F", fontSize: 22 }} />
         ) : (
-          <DarkIcon sx={{ color: "#5E35B1", fontSize: 22 }} />
+          <DarkIcon sx={{ color: "#2E7D32", fontSize: 22 }} />
         )}
       </IconButton>
     </Tooltip>
