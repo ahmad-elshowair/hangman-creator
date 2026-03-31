@@ -2,6 +2,7 @@
 
 import { createTheme, type Theme } from "@mui/material/styles";
 import { gradients } from "@/constants/gradients";
+import { neuShadows } from "@/constants/neumorphism";
 
 const sharedTypography = {
   fontFamily: "var(--font-outfit), sans-serif",
@@ -24,14 +25,12 @@ const sharedComponents = {
         padding: "10px 24px",
         textTransform: "none" as const,
         fontSize: "1rem",
-        transition: "all 0.2s ease-in-out",
+        transition: neuShadows.transition,
       },
       containedPrimary: {
         background: gradients.button,
-        boxShadow: "0 4px 20px rgba(46, 125, 50, 0.4)",
         "&:hover": {
           background: gradients.buttonHover,
-          boxShadow: "0 6px 28px rgba(46, 125, 50, 0.55)",
           transform: "translateY(-1px)",
         },
       },
@@ -42,8 +41,8 @@ const sharedComponents = {
       root: {
         "& .MuiOutlinedInput-root": {
           borderRadius: 12,
-          "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#2E7D32",
+          "& fieldset": {
+            border: "none",
           },
         },
       },
@@ -58,7 +57,7 @@ export const darkTheme: Theme = createTheme({
     secondary: { main: "#4DB6AC", light: "#80CBC4", dark: "#0097A7" },
     success: { main: "#69F0AE", light: "#B9F6CA", dark: "#00C853" },
     error: { main: "#FF5252", light: "#FF8A80", dark: "#D50000" },
-    background: { default: "#0F1A14", paper: "rgba(15, 26, 20, 0.85)" },
+    background: { default: "#0F1A14", paper: "#152A1C" },
     text: { primary: "#E8EAED", secondary: "#9AA0A6" },
   },
   typography: sharedTypography,
@@ -69,8 +68,7 @@ export const darkTheme: Theme = createTheme({
       styleOverrides: {
         root: {
           backgroundImage: "none",
-          backdropFilter: "blur(16px)",
-          border: "1px solid rgba(255, 255, 255, 0.06)",
+          boxShadow: neuShadows.dark.raised,
         },
       },
     },
@@ -78,9 +76,35 @@ export const darkTheme: Theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 20,
-          backdropFilter: "blur(16px)",
-          border: "1px solid rgba(255, 255, 255, 0.06)",
-          background: "rgba(15, 26, 20, 0.7)",
+          boxShadow: neuShadows.dark.raised,
+          background: "inherit",
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        ...sharedComponents.MuiButton.styleOverrides,
+        containedPrimary: {
+          ...sharedComponents.MuiButton.styleOverrides.containedPrimary,
+          boxShadow: neuShadows.dark.raisedSmall,
+          "&:hover": {
+            ...sharedComponents.MuiButton.styleOverrides.containedPrimary["&:hover"],
+            boxShadow: neuShadows.dark.flat,
+          },
+          "&:active": {
+            boxShadow: neuShadows.dark.inset,
+          },
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          ...sharedComponents.MuiTextField.styleOverrides.root,
+          "& .MuiOutlinedInput-root": {
+            ...sharedComponents.MuiTextField.styleOverrides.root["& .MuiOutlinedInput-root"],
+            boxShadow: neuShadows.dark.inset,
+          },
         },
       },
     },
@@ -94,7 +118,7 @@ export const lightTheme: Theme = createTheme({
     secondary: { main: "#0097A7", light: "#4DB6AC", dark: "#006064" },
     success: { main: "#2E7D32", light: "#4CAF50", dark: "#1B5E20" },
     error: { main: "#D32F2F", light: "#EF5350", dark: "#B71C1C" },
-    background: { default: "#F0F4F2", paper: "#FFFFFF" },
+    background: { default: "#F0F4F2", paper: "#F0F4F2" },
     text: { primary: "#1A1A2E", secondary: "#5A5A7A" },
   },
   typography: sharedTypography,
@@ -105,8 +129,7 @@ export const lightTheme: Theme = createTheme({
       styleOverrides: {
         root: {
           backgroundImage: "none",
-          border: "1px solid rgba(0, 0, 0, 0.08)",
-          boxShadow: "0 2px 12px rgba(0, 0, 0, 0.06)",
+          boxShadow: neuShadows.light.raised,
         },
       },
     },
@@ -114,8 +137,35 @@ export const lightTheme: Theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 20,
-          border: "1px solid rgba(0, 0, 0, 0.08)",
-          boxShadow: "0 2px 16px rgba(0, 0, 0, 0.06)",
+          boxShadow: neuShadows.light.raised,
+          background: "inherit",
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        ...sharedComponents.MuiButton.styleOverrides,
+        containedPrimary: {
+          ...sharedComponents.MuiButton.styleOverrides.containedPrimary,
+          boxShadow: neuShadows.light.raisedSmall,
+          "&:hover": {
+            ...sharedComponents.MuiButton.styleOverrides.containedPrimary["&:hover"],
+            boxShadow: neuShadows.light.flat,
+          },
+          "&:active": {
+            boxShadow: neuShadows.light.inset,
+          },
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          ...sharedComponents.MuiTextField.styleOverrides.root,
+          "& .MuiOutlinedInput-root": {
+            ...sharedComponents.MuiTextField.styleOverrides.root["& .MuiOutlinedInput-root"],
+            boxShadow: neuShadows.light.inset,
+          },
         },
       },
     },

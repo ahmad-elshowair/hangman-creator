@@ -29,15 +29,15 @@
 
 **⚠️ CRITICAL**: No component-level work can begin until this phase is complete.
 
-- [ ] T002 Update `src/theme.ts` lightTheme — replace MuiPaper border+boxShadow with `neuShadows.light.raised`, set background to `#F0F4F2`, remove border.
-- [ ] T003 Update `src/theme.ts` lightTheme — replace MuiCard border+boxShadow with `neuShadows.light.raised`, remove border.
-- [ ] T004 Update `src/theme.ts` lightTheme — update MuiButton.containedPrimary to use 3-state shadow flip: `neuShadows.light.raisedSmall` (default) → `neuShadows.light.flat` (hover) → `neuShadows.light.inset` (active/click).
-- [ ] T005 Update `src/theme.ts` lightTheme — update MuiTextField to use `neuShadows.light.inset` on the input root, removing the outlined border.
-- [ ] T006 Update `src/theme.ts` darkTheme — replace MuiPaper border+backdropFilter with `neuShadows.dark.raised`, set **opaque** background to `#152A1C` (shift from translucent `rgba(15, 26, 20, 0.85)` — neumorphism requires opaque surfaces for shadows to render correctly), remove border.
-- [ ] T007 Update `src/theme.ts` darkTheme — replace MuiCard border+backdropFilter with `neuShadows.dark.raised`, remove border.
-- [ ] T008 Update `src/theme.ts` darkTheme — update MuiButton.containedPrimary with dark shadow tokens (raised, flat hover, inset active).
-- [ ] T009 Update `src/theme.ts` darkTheme — update MuiTextField with `neuShadows.dark.inset`.
-- [ ] T010 Update `src/theme.ts` sharedComponents — set transition to `neuShadows.transition` on MuiButton root.
+- [x] T002 Update `src/theme.ts` lightTheme — replace MuiPaper border+boxShadow with `neuShadows.light.raised`, set background to `#F0F4F2`, remove border.
+- [x] T003 Update `src/theme.ts` lightTheme — replace MuiCard border+boxShadow with `neuShadows.light.raised`, remove border.
+- [x] T004 Update `src/theme.ts` lightTheme — update MuiButton.containedPrimary to use 3-state shadow flip: `neuShadows.light.raisedSmall` (default) → `neuShadows.light.flat` (hover) → `neuShadows.light.inset` (active/click).
+- [x] T005 Update `src/theme.ts` lightTheme — update MuiTextField to use `neuShadows.light.inset` on the input root, removing the outlined border.
+- [x] T006 Update `src/theme.ts` darkTheme — replace MuiPaper border+backdropFilter with `neuShadows.dark.raised`, set **opaque** background to `#152A1C` (shift from translucent `rgba(15, 26, 20, 0.85)` — neumorphism requires opaque surfaces for shadows to render correctly), remove border.
+- [x] T007 Update `src/theme.ts` darkTheme — replace MuiCard border+backdropFilter with `neuShadows.dark.raised`, remove border.
+- [x] T008 Update `src/theme.ts` darkTheme — update MuiButton.containedPrimary with dark shadow tokens (raised, flat hover, inset active).
+- [x] T009 Update `src/theme.ts` darkTheme — update MuiTextField with `neuShadows.dark.inset`.
+- [x] T010 Update `src/theme.ts` sharedComponents — set transition to `neuShadows.transition` on MuiButton root.
 
 **Checkpoint**: Theme overrides complete. All Paper, Card, Button, and TextField elements should now render with neumorphic shadows globally.
 
