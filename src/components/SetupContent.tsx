@@ -155,7 +155,7 @@ export default function SetupContent() {
         sx={{
           p: { xs: 2.5, md: 4 },
           mb: 3,
-          background: isDark ? "rgba(18, 24, 48, 0.7)" : undefined,
+          background: isDark ? "rgba(15, 26, 20, 0.7)" : undefined,
         }}
       >
         {/* MAX MISTAKES */}

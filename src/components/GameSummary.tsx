@@ -43,7 +43,7 @@ export default function GameSummary({
         sx={{
           p: { xs: 3, md: 5 },
           textAlign: "center",
-          background: isDark ? "rgba(18, 24, 48, 0.7)" : undefined,
+          background: isDark ? "rgba(15, 26, 20, 0.7)" : undefined,
         }}
       >
         {/* TROPHY ICON */}
