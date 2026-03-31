@@ -19,7 +19,7 @@
 
 **Purpose**: Create the foundational shadow token system.
 
-- [ ] T001 Create `src/constants/neumorphism.ts` with all shadow tokens (light.raised, light.raisedSmall, light.inset, light.flat, dark variants, correctInset, wrongInset, transition constant) per data-model.md.
+- [x] T001 Create `src/constants/neumorphism.ts` with all shadow tokens (light.raised, light.raisedSmall, light.inset, light.flat, dark variants, correctInset, wrongInset, transition constant) per data-model.md.
 
 ---
 
