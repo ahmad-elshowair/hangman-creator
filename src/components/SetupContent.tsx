@@ -175,7 +175,7 @@ export default function SetupContent() {
               flex: 1,
               "& .MuiSlider-thumb": {
                 background: gradients.brandReverse,
-                boxShadow: "0 0 12px rgba(124, 77, 255, 0.5)",
+                boxShadow: "0 0 12px rgba(46, 125, 50, 0.5)",
               },
               "& .MuiSlider-track": {
                 background: gradients.progress,
@@ -189,8 +189,8 @@ export default function SetupContent() {
               fontWeight: 700,
               fontSize: "1.1rem",
               minWidth: 44,
-              background: "rgba(124, 77, 255, 0.2)",
-              border: "1px solid rgba(124, 77, 255, 0.3)",
+              background: "rgba(46, 125, 50, 0.2)",
+              border: "1px solid rgba(46, 125, 50, 0.3)",
             }}
           />
         </Box>
@@ -266,15 +266,15 @@ export default function SetupContent() {
                   sx={{
                     fontWeight: 500,
                     fontSize: "0.9rem",
-                    background: "rgba(124, 77, 255, 0.12)",
-                    border: "1px solid rgba(124, 77, 255, 0.2)",
+                    background: "rgba(46, 125, 50, 0.12)",
+                    border: "1px solid rgba(46, 125, 50, 0.2)",
                     transition: "all 0.3s ease",
                     "& .MuiChip-label": {
                       filter: "blur(4px)",
                       transition: "filter 0.3s ease",
                     },
                     "&:hover": {
-                      background: "rgba(124, 77, 255, 0.2)",
+                      background: "rgba(46, 125, 50, 0.2)",
                       "& .MuiChip-label": {
                         filter: "blur(0)",
                       },

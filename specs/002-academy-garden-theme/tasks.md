@@ -19,10 +19,10 @@
 ## Phase 3: User Story 1 - Nature & Growth Identity (P1)
 *Applying the theme to active components and UI flows.*
 
-- [ ] T006 [P] [US1] Audit and replace hardcoded purple `rgba(124, 77, 255, ...)` values in `src/components/SetupContent.tsx` (specifically in Slider and Word Chips).
-- [ ] T007 [P] [US1] Update `src/components/GameSkeleton.tsx` background colors to match the new Soft Mint background in Light Mode.
-- [ ] T008 [P] [US1] Verify Word Chips in `SetupContent` use the new Emerald tint for both blurred and reveal states.
-- [ ] T008b [P] [US1] Audit `src/components/PlayContent.tsx`, `src/components/Keyboard.tsx`, and `src/components/WordDisplay.tsx` to ensure all purple active states are removed.
+- [x] T006 [P] [US1] Audit and replace hardcoded purple `rgba(124, 77, 255, ...)` values in `src/components/SetupContent.tsx` (specifically in Slider and Word Chips).
+- [x] T007 [P] [US1] Update `src/components/GameSkeleton.tsx` background colors to match the new Soft Mint background in Light Mode.
+- [x] T008 [P] [US1] Verify Word Chips in `SetupContent` use the new Emerald tint for both blurred and reveal states.
+- [x] T008b [P] [US1] Audit `src/components/PlayContent.tsx`, `src/components/Keyboard.tsx`, and `src/components/WordDisplay.tsx` to ensure all purple active states are removed.
 ## Phase 4: Polish & Final Verification
 *Ensuring a high-quality finish for student eyes.*
 

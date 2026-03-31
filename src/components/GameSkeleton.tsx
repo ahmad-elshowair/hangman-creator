@@ -27,7 +27,7 @@ export default function GameSkeleton() {
       {/* HANGMAN FIGURE SKELETON */}
       <Paper
         elevation={0}
-        sx={{ p: 2, mb: 2, background: "rgba(18, 24, 48, 0.2)" }}
+        sx={{ p: 2, mb: 2 }}
       >
         <Skeleton
           variant="rounded"
