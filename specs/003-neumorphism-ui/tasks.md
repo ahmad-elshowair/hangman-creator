@@ -51,11 +51,11 @@
 
 ### Implementation for User Story 1
 
-- [ ] T011 [US1] Audit `src/components/SetupContent.tsx` — remove the hardcoded `background: isDark ? "rgba(15, 26, 20, 0.7)" : undefined` from the main Paper since theme now handles it.
-- [ ] T012 [P] [US1] Update Word Chips in `src/components/SetupContent.tsx` — apply `neuShadows` raisedSmall (mode-aware) to each chip's `sx` prop. Import `neuShadows` from constants.
-- [ ] T013 [P] [US1] Update Mistakes Chip in `src/components/SetupContent.tsx` — apply `neuShadows` raisedSmall to the max-mistakes counter chip.
-- [ ] T014 [US1] Update `src/components/SetupContent.tsx` Slider thumb — apply `neuShadows` raisedSmall to the thumb `sx` override to give it a tactile, raised feel that harmonizes with the neumorphic card. Remove any conflicting drop shadows.
-- [ ] T015 [US1] Visual check — load Setup page in both Light and Dark modes. Confirm card raised, input inset, chips raised, button shadow flip on click.
+- [x] T011 [US1] Audit `src/components/SetupContent.tsx` — remove the hardcoded `background: isDark ? "rgba(15, 26, 20, 0.7)" : undefined` from the main Paper since theme now handles it.
+- [x] T012 [P] [US1] Update Word Chips in `src/components/SetupContent.tsx` — apply `neuShadows` raisedSmall (mode-aware) to each chip's `sx` prop. Import `neuShadows` from constants.
+- [x] T013 [P] [US1] Update Mistakes Chip in `src/components/SetupContent.tsx` — apply `neuShadows` raisedSmall to the max-mistakes counter chip.
+- [x] T014 [US1] Update `src/components/SetupContent.tsx` Slider thumb — apply `neuShadows` raisedSmall to the thumb `sx` override to give it a tactile, raised feel that harmonizes with the neumorphic card. Remove any conflicting drop shadows.
+- [x] T015 [US1] Visual check — load Setup page in both Light and Dark modes. Confirm card raised, input inset, chips raised, button shadow flip on click.
 
 **Checkpoint**: Setup page fully neumorphic. Independently verifiable.
 
