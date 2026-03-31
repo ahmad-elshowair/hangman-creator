@@ -85,9 +85,9 @@
 
 **Purpose**: Final verification across all pages and modes.
 
-- [ ] T023 Accessibility check — tab through all interactive elements on Setup and Play pages. Verify focus outlines remain crisp and visible (not obscured by shadows).
-- [ ] T024 Performance check — rapidly click keyboard keys on Play page. Confirm no frame drops or stutter.
-- [ ] T025 Run full `quickstart.md` verification checklist on dev server.
+- [x] T023 Accessibility check — tab through all interactive elements on Setup and Play pages. Verify focus outlines remain crisp and visible (not obscured by shadows).
+- [x] T024 Performance check — rapidly click keyboard keys on Play page. Confirm no frame drops or stutter.
+- [x] T025 Run full `quickstart.md` verification checklist on dev server.
 
 > **Batch Pattern Note**: T011, T019, and T020 all perform the same operation — removing a hardcoded `background: isDark ? "rgba(15, 26, 20, ...)" : undefined` from a Paper `sx` prop. They target different files (`SetupContent.tsx`, `PlayContent.tsx`, `GameSummary.tsx`) and can be executed as a coordinated batch during implementation.
 

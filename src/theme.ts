@@ -26,6 +26,12 @@ const sharedComponents = {
         textTransform: "none" as const,
         fontSize: "1rem",
         transition: neuShadows.transition,
+        "&.Mui-focusVisible": {
+          outline: "2px solid",
+          outlineColor: "primary.main",
+          outlineOffset: 3,
+          boxShadow: "none",
+        },
       },
       containedPrimary: {
         background: gradients.button,
@@ -43,6 +49,9 @@ const sharedComponents = {
           borderRadius: 12,
           "& fieldset": {
             border: "none",
+          },
+          "&.Mui-focused": {
+            boxShadow: "0 0 0 2px var(--mui-palette-primary-main)",
           },
         },
       },

@@ -76,12 +76,12 @@ export default function Keyboard({
       background: "transparent",
       border: "none",
       color: errorText,
-      boxShadow: neuShadows.wrongInset,
       opacity: 0.7,
       transform: "scale(0.96)",
       "&.Mui-disabled": {
         color: errorText,
         opacity: 0.7,
+        border: "none",
       },
     };
   };
