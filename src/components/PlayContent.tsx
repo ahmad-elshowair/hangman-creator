@@ -19,16 +19,23 @@ import GameSkeleton from "@/components/GameSkeleton";
 import GameSummary from "@/components/GameSummary";
 import GameProgress from "@/components/GameProgress";
 import GameStatus from "@/components/GameStatus";
+import LanguageMismatchDialog from "@/components/LanguageMismatchDialog";
 import { decodeGameConfig, extractLegacyHashConfig } from "@/utils/shareLink";
 
 export default function PlayContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { words, maxMistakes, hasHydrated } = useGameStore();
-  const t = useLocaleStore((state) => state.t);
+  const { t, locale, setLocale } = useLocaleStore((state) => ({
+    t: state.t,
+    locale: state.locale,
+    setLocale: state.setLocale,
+  }));
 
   // BACKWARD COMPATIBILITY & URL STATE INITIALIZATION
   const [hashChecked, setHashChecked] = useState(false);
+  const [mismatchDialogOpen, setMismatchDialogOpen] = useState(false);
+  const [mismatchHandled, setMismatchHandled] = useState(false);
   
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -57,6 +64,32 @@ export default function PlayContent() {
   const finalMaxMistakes = hasSharedConfig
     ? sharedConfig.maxMistakes
     : maxMistakes;
+
+  useEffect(() => {
+    if (
+      hasSharedConfig &&
+      sharedConfig.locale &&
+      sharedConfig.locale !== locale &&
+      hasHydrated &&
+      !mismatchHandled
+    ) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setMismatchDialogOpen(true);
+    }
+  }, [hasSharedConfig, sharedConfig, locale, hasHydrated, mismatchHandled]);
+
+  const handleSwitchLanguage = () => {
+    if (sharedConfig?.locale) {
+      setLocale(sharedConfig.locale);
+    }
+    setMismatchDialogOpen(false);
+    setMismatchHandled(true);
+  };
+
+  const handleKeepCurrent = () => {
+    setMismatchDialogOpen(false);
+    setMismatchHandled(true);
+  };
 
   // WAIT FOR HYDRATION (STORE) OR HASH CHECK
   if (!hasSharedConfig && !hasHydrated) {
@@ -87,7 +120,20 @@ export default function PlayContent() {
     );
   }
 
-  return <GameView config={{ words: finalWords, maxMistakes: finalMaxMistakes }} />;
+  return (
+    <>
+      <GameView config={{ words: finalWords, maxMistakes: finalMaxMistakes }} />
+      {hasSharedConfig && sharedConfig.locale && (
+        <LanguageMismatchDialog
+          open={mismatchDialogOpen}
+          gameLocale={sharedConfig.locale}
+          userLocale={locale}
+          onSwitch={handleSwitchLanguage}
+          onKeep={handleKeepCurrent}
+        />
+      )}
+    </>
+  );
 }
 
 interface GameViewProps {

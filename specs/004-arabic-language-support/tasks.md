@@ -114,10 +114,10 @@
 
 **Purpose**: Shared link language mismatch dialog, edge cases, validation
 
-- [ ] T028 Create LanguageMismatchDialog component in `src/components/PlayContent.tsx` (or separate file `src/components/LanguageMismatchDialog.tsx`) — MUI Dialog with `LanguageMismatchDialogProps` interface (gameLocale, userLocale, onSwitch, onKeep, open); title uses `t("dialog.languageMismatchTitle")`; message uses `t("dialog.languageMismatchMessage")`; two buttons: switch language (`t("dialog.switchLanguage")`) and keep current (`t("dialog.keepCurrent")`)
-- [ ] T029 Integrate language mismatch dialog in `src/components/PlayContent.tsx` — when loading config from shared URL, compare `config.locale` (from decoded share link) with `useLocaleStore.locale`; if mismatch and both are defined, show LanguageMismatchDialog before game starts; on switch: call `setLocale(config.locale)` then start game; on keep: start game with current locale (keyboard adapts per-word via FR-015 logic from T014)
-- [ ] T030 Run `pnpm run lint` and fix any linting errors introduced by the feature
-- [ ] T031 Run `pnpm run build` and verify static export succeeds with no errors; also verify SC-005: switch back to English and confirm the entire app looks and functions identically to the pre-feature version (no visual regressions, no missing text, layout unchanged)
+- [x] T028 Create LanguageMismatchDialog component in `src/components/PlayContent.tsx` (or separate file `src/components/LanguageMismatchDialog.tsx`) — MUI Dialog with `LanguageMismatchDialogProps` interface (gameLocale, userLocale, onSwitch, onKeep, open); title uses `t("dialog.languageMismatchTitle")`; message uses `t("dialog.languageMismatchMessage")`; two buttons: switch language (`t("dialog.switchLanguage")`) and keep current (`t("dialog.keepCurrent")`)
+- [x] T029 Integrate language mismatch dialog in `src/components/PlayContent.tsx` — when loading config from shared URL, compare `config.locale` (from decoded share link) with `useLocaleStore.locale`; if mismatch and both are defined, show LanguageMismatchDialog before game starts; on switch: call `setLocale(config.locale)` then start game; on keep: start game with current locale (keyboard adapts per-word via FR-015 logic from T014)
+- [x] T030 Run `pnpm run lint` and fix any linting errors introduced by the feature
+- [x] T031 Run `pnpm run build` and verify static export succeeds with no errors; also verify SC-005: switch back to English and confirm the entire app looks and functions identically to the pre-feature version (no visual regressions, no missing text, layout unchanged)
 
 ---
 
