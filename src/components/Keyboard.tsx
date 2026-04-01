@@ -38,7 +38,7 @@ export default function Keyboard({
         color: theme.palette.text.primary,
         boxShadow: neu.raisedSmall,
         "&:hover": {
-          boxShadow: neu.flat,
+          boxShadow: neu.inset,
           transform: "translateY(-1px)",
         },
         "&:active": {
@@ -82,6 +82,7 @@ export default function Keyboard({
         color: errorText,
         opacity: 0.7,
         border: "none",
+        boxShadow: neu.inset,
       },
     };
   };
@@ -115,9 +116,9 @@ export default function Keyboard({
               onClick={() => onGuess(letter)}
               aria-label={`Guess letter ${letter}`}
               sx={{
-                minWidth: { xs: 36, sm: 48 },
-                height: { xs: 44, sm: 52 },
-                fontSize: { xs: "0.95rem", sm: "1.15rem" },
+                minWidth: { xs: 36, sm: 70 },
+                height: { xs: 44, sm: 62 },
+                fontSize: { xs: "0.95rem", sm: "1.5rem" },
                 fontWeight: 700,
                 borderRadius: 2.5,
                 p: 0,

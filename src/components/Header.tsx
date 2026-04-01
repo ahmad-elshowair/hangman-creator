@@ -15,7 +15,6 @@ export default function Header() {
       elevation={0}
       sx={{
         background: "transparent",
-        color: "text.primary",
         border: "none",
         boxShadow: "none",
       }}
@@ -31,9 +30,8 @@ export default function Header() {
               alignItems: "center",
               background: "none",
               border: "none",
-              padding: 0,
+              p: 0,
               cursor: "pointer",
-              flexGrow: 1,
               textAlign: "left",
               "&:focus-visible": {
                 outline: "2px solid #2E7D32",
@@ -74,6 +72,8 @@ export default function Header() {
             </Typography>
           </Box>
         </Tooltip>
+
+        <Box sx={{ flexGrow: 1 }} />
 
         <ThemeToggle edge="end" />
       </Toolbar>
