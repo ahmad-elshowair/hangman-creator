@@ -104,7 +104,7 @@
 
 ### Implementation for User Story 4
 
-- [ ] T027 [US4] Verify Arabic font rendering in `src/app/layout.tsx` and `src/theme.ts` — confirm Noto Sans Arabic loads with `--font-arabic` CSS variable; confirm `createAppTheme` sets Arabic font as primary in RTL mode; test at all sizes: word display (large), keyboard keys (medium), labels/buttons (small), tooltips (small)
+- [x] T027 [US4] Verify Arabic font rendering in `src/app/layout.tsx` and `src/theme.ts` — confirm Noto Sans Arabic loads with `--font-arabic` CSS variable; confirm `createAppTheme` sets Arabic font as primary in RTL mode; test at all sizes: word display (large), keyboard keys (medium), labels/buttons (small), tooltips (small)
 
 **Checkpoint**: Arabic text legible at all sizes, English experience visually unchanged
 
