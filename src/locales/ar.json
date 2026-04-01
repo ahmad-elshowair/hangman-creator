@@ -30,7 +30,7 @@
     "theWordWas": "الكلمة كانت:",
     "perfectScore": "نتيجة مثالية!",
     "gameOver": "انتهت اللعبة!",
-    "completedWords": "أكملت جميع الكلمات البـ {total}",
+    "completedWords": "أكملت جميع الكلمات الـ {total}",
     "correctLabel": "صحيح",
     "missedLabel": "خطأ",
     "newGame": "لعبة جديدة",
@@ -42,7 +42,7 @@
     "title": "لعبة المشنقة"
   },
   "footer": {
-    "createdWith": "أنشئ بواسطة",
+    "createdWith": "أنشئ",
     "by": "بواسطة"
   },
   "theme": {
@@ -51,7 +51,7 @@
   },
   "language": {
     "switchToArabic": "التبديل إلى العربية",
-    "switchToEnglish": "Switch to English"
+    "switchToEnglish": "التبديل إلى الإنجليزية"
   },
   "dialog": {
     "languageMismatchTitle": "اختلاف اللغة",

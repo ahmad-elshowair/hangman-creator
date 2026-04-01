@@ -61,6 +61,7 @@ export default function Header() {
             <Typography
               variant="h6"
               component="div"
+              suppressHydrationWarning
               sx={{
                 fontWeight: 700,
                 background: gradients.brand,

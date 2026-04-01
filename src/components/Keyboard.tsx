@@ -3,7 +3,6 @@
 import { Box, Button, useTheme } from "@mui/material";
 import { neuShadows } from "@/constants/neumorphism";
 import ARABIC_KEYBOARD_ROWS from "@/constants/arabicKeyboard";
-import { getLamAlefMappedLetters } from "@/hooks/useHangman";
 
 interface KeyboardProps {
   guessedLetters: Set<string>;
@@ -44,9 +43,8 @@ export default function Keyboard({
   const isArabic = script === "arabic";
 
   const getKeyStyles = (letter: string) => {
-    const mapped = getLamAlefMappedLetters(letter);
-    const guessed = mapped.every((l) => guessedLetters.has(l));
-    const correct = mapped.every((l) => correctLetters.has(l));
+    const guessed = guessedLetters.has(letter);
+    const correct = correctLetters.has(letter);
 
     if (!guessed) {
       return {
@@ -128,8 +126,7 @@ export default function Keyboard({
         >
           {row.map(({ letter, label }) => {
             const displayChar = label || letter;
-            const mapped = getLamAlefMappedLetters(letter);
-            const guessed = mapped.every((l) => guessedLetters.has(l));
+            const guessed = guessedLetters.has(letter);
 
             return (
               <Button

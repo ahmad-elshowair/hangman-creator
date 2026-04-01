@@ -41,13 +41,6 @@ interface UseHangmanReturn {
   resetGame: () => void;
 }
 
-export function getLamAlefMappedLetters(letter: string): string[] {
-  if (letter === "\uFEFB" || letter === "لا") {
-    return ["\u0644", "\u0627"]; // Lam + Alef
-  }
-  return [letter];
-}
-
 export function useHangman(
   words: string[],
   maxMistakes: number,
@@ -114,20 +107,12 @@ export function useHangman(
       if (isWordFinished) return;
       
       const upper = letter.toUpperCase();
-      const mappedLetters = getLamAlefMappedLetters(upper);
 
       setState((prev) => {
+        if (prev.guessedLetters.has(upper)) return prev;
+
         const newGuessed = new Set(prev.guessedLetters);
-        let added = false;
-        
-        for (const l of mappedLetters) {
-          if (!newGuessed.has(l)) {
-            newGuessed.add(l);
-            added = true;
-          }
-        }
-        
-        if (!added) return prev; // No new letters added
+        newGuessed.add(upper);
 
         return {
           ...prev,

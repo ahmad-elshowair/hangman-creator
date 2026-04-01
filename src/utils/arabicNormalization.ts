@@ -11,20 +11,24 @@ const TASHKEEL_REGEX =
 export function normalizeArabicForGameplay(text: string): string {
   let normalized = text;
 
+  // 1. Consistently decompose all ligatures to plain Lam + Alef
   for (const [ligature, decomposed] of Object.entries(LAM_ALEF_MAP)) {
     normalized = normalized.replaceAll(ligature, decomposed);
   }
 
+  // 2. Strip diacritics
   normalized = normalized.replace(TASHKEEL_REGEX, "");
 
+  // 3. Normalize forms
   normalized = normalized.normalize("NFC");
 
-  return normalized;
-}
+  // 4. Normalize all Alef variants to plain Alef (\u0627)
+  // This matches the simplified keyboard which only has one Alef key.
+  normalized = normalized.replace(/[\u0622\u0623\u0625]/g, "\u0627");
 
-export function getLamAlefMappedLetters(letter: string): string[] {
-  if (LAM_ALEF_MAP[letter]) {
-    return ["\u0644", "\u0627"];
-  }
-  return [letter];
+  // 5. COMPOSE: Merge every plain Lam + Alef back into the single ligature character \uFEFB
+  // This makes it a single logical character for the hangman game logic.
+  normalized = normalized.replaceAll("\u0644\u0627", "\uFEFB");
+
+  return normalized;
 }

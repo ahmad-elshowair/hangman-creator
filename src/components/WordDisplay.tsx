@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 
 interface WordDisplayProps {
@@ -26,14 +27,23 @@ export default function WordDisplay({
 
   const isLongPhrase = maskedWord.length > 18;
 
+  // For Arabic words, reverse the display order at the JS level so the first
+  // letter (index 0) appears on the right. This avoids CSS direction / RTL
+  // plugin interactions that cause double-flipping.
+  const displayItems = useMemo(() => {
+    const items = maskedWord.map((char, i) => ({ char, originalIndex: i }));
+    return isArabic ? [...items].reverse() : items;
+  }, [maskedWord, isArabic]);
+
   return (
     <Box
+      style={{ direction: "ltr", flexDirection: "row" }}
       sx={{
         display: "flex",
         justifyContent: "center",
-        flexWrap: "nowrap", // Strictly one line
+        flexWrap: "nowrap",
         width: "100%",
-        direction: isArabic ? "rtl" : "ltr",
+
         gap: {
           xs: isLongPhrase ? 0.15 : 0.25,
           sm: isLongPhrase ? 0.25 : 0.5,
@@ -41,19 +51,19 @@ export default function WordDisplay({
         my: 3,
       }}
     >
-      {maskedWord.map((char, i) => {
+      {displayItems.map(({ char, originalIndex }) => {
         const isRevealed = char !== "_";
         const isSpace = char === " ";
         const isHyphen = char === "-";
 
         // ON LOSS, SHOW THE MISSING LETTERS IN RED
         const showMissed = isWordFinished && !isWordWon && char === "_";
-        const displayChar = showMissed ? currentWord[i] : char;
+        const displayChar = showMissed ? currentWord[originalIndex] : char;
 
         if (isSpace) {
           return (
             <Box
-              key={i}
+              key={originalIndex}
               sx={{
                 width: `calc(40vw / ${charCount})`,
                 maxWidth: 24,
@@ -65,7 +75,7 @@ export default function WordDisplay({
 
         return (
           <Box
-            key={i}
+            key={originalIndex}
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -85,7 +95,6 @@ export default function WordDisplay({
               component="span"
               sx={{
                 fontWeight: 800,
-                // Scale font dynamically to never overflow the box width
                 fontSize: {
                   xs: `clamp(0.4rem, calc(80vw / ${charCount}), 1.5rem)`,
                   sm: `clamp(0.6rem, calc(80vw / ${charCount}), 2.2rem)`,
@@ -98,7 +107,9 @@ export default function WordDisplay({
                     ? "primary.light"
                     : "text.secondary",
                 textTransform: isArabic ? "none" : "uppercase",
-                fontFamily: isArabic ? "var(--font-arabic), sans-serif" : "inherit",
+                fontFamily: isArabic
+                  ? "var(--font-arabic), sans-serif"
+                  : "inherit",
                 transition: "color 0.3s ease",
               }}
             >

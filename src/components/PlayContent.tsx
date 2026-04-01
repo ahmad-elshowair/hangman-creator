@@ -26,22 +26,20 @@ export default function PlayContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { words, maxMistakes, hasHydrated } = useGameStore();
-  const { t, locale, setLocale } = useLocaleStore((state) => ({
-    t: state.t,
-    locale: state.locale,
-    setLocale: state.setLocale,
-  }));
+  const t = useLocaleStore((state) => state.t);
+  const locale = useLocaleStore((state) => state.locale);
+  const setLocale = useLocaleStore((state) => state.setLocale);
 
   // BACKWARD COMPATIBILITY & URL STATE INITIALIZATION
   const [hashChecked, setHashChecked] = useState(false);
   const [mismatchDialogOpen, setMismatchDialogOpen] = useState(false);
   const [mismatchHandled, setMismatchHandled] = useState(false);
-  
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const hash = window.location.hash;
       const legacyPayload = extractLegacyHashConfig(hash);
-      
+
       if (legacyPayload) {
         // Auto-Redirect out of legacy hash logic into clean params
         router.replace(`?config=${legacyPayload}`);
@@ -164,6 +162,7 @@ function GameView({ config }: GameViewProps) {
     resetGame,
   } = useHangman(config.words, config.maxMistakes);
   const t = useLocaleStore((state) => state.t);
+  const locale = useLocaleStore((state) => state.locale);
 
   // HANDLE KEYBOARD INPUT
   useEffect(() => {
@@ -245,6 +244,8 @@ function GameView({ config }: GameViewProps) {
               endIcon={
                 currentWordIndex === totalWords - 1 ? (
                   <TrophyIcon />
+                ) : locale === "ar" ? (
+                  <NextIcon sx={{ transform: "rotate(180deg)" }} />
                 ) : (
                   <NextIcon />
                 )
@@ -257,7 +258,9 @@ function GameView({ config }: GameViewProps) {
                 fontSize: "1.1rem",
               }}
             >
-              {currentWordIndex === totalWords - 1 ? t("play.finishGame") : t("play.nextWord")}
+              {currentWordIndex === totalWords - 1
+                ? t("play.finishGame")
+                : t("play.nextWord")}
             </Button>
           </Box>
         ) : (

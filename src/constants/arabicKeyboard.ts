@@ -30,6 +30,8 @@ const ARABIC_KEYBOARD_ROWS: KeyboardRow[] = [
     { letter: "\u0646" },
     { letter: "\u0645" },
     { letter: "\u0643" },
+    { letter: "\u062F" },
+    { letter: "\u0630" },
     { letter: "\u0637" },
   ],
   [
