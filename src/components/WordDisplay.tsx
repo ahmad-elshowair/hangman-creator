@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 
 interface WordDisplayProps {
@@ -7,6 +8,7 @@ interface WordDisplayProps {
   isWordFinished: boolean;
   currentWord: string;
   isWordWon: boolean;
+  isArabic?: boolean;
 }
 
 export default function WordDisplay({
@@ -14,39 +16,66 @@ export default function WordDisplay({
   isWordFinished,
   currentWord,
   isWordWon,
+  isArabic = false,
 }: WordDisplayProps) {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
 
+  // Use a minimum divisor for scaling so short words don't become excessively huge
+  // but long phrases shrink smoothly on small screens.
+  const charCount = Math.max(10, maskedWord.length);
+
+  const isLongPhrase = maskedWord.length > 18;
+
+  // For Arabic words, reverse the display order at the JS level so the first
+  // letter (index 0) appears on the right. This avoids CSS direction / RTL
+  // plugin interactions that cause double-flipping.
+  const displayItems = useMemo(() => {
+    const items = maskedWord.map((char, i) => ({ char, originalIndex: i }));
+    return isArabic ? [...items].reverse() : items;
+  }, [maskedWord, isArabic]);
+
   return (
     <Box
+      style={{ direction: "ltr", flexDirection: "row" }}
       sx={{
         display: "flex",
         justifyContent: "center",
         flexWrap: "nowrap",
         width: "100%",
-        gap: { xs: 0.5, sm: 1 },
+
+        gap: {
+          xs: isLongPhrase ? 0.15 : 0.25,
+          sm: isLongPhrase ? 0.25 : 0.5,
+        },
         my: 3,
       }}
     >
-      {maskedWord.map((char, i) => {
+      {displayItems.map(({ char, originalIndex }) => {
         const isRevealed = char !== "_";
         const isSpace = char === " ";
         const isHyphen = char === "-";
 
         // ON LOSS, SHOW THE MISSING LETTERS IN RED
         const showMissed = isWordFinished && !isWordWon && char === "_";
-        const displayChar = showMissed ? currentWord[i] : char;
+        const displayChar = showMissed ? currentWord[originalIndex] : char;
 
         if (isSpace) {
           return (
-            <Box key={i} sx={{ width: { xs: 12, sm: 20 }, flexShrink: 0 }} />
+            <Box
+              key={originalIndex}
+              sx={{
+                width: `calc(40vw / ${charCount})`,
+                maxWidth: 24,
+                flexShrink: 1,
+              }}
+            />
           );
         }
 
         return (
           <Box
-            key={i}
+            key={originalIndex}
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -67,16 +96,20 @@ export default function WordDisplay({
               sx={{
                 fontWeight: 800,
                 fontSize: {
-                  xs: "clamp(1rem, 5vw, 1.5rem)",
-                  sm: "clamp(1.2rem, 4vw, 2.2rem)",
+                  xs: `clamp(0.4rem, calc(80vw / ${charCount}), 1.5rem)`,
+                  sm: `clamp(0.6rem, calc(80vw / ${charCount}), 2.2rem)`,
                 },
+                lineHeight: 1,
                 letterSpacing: "0.05em",
                 color: showMissed
                   ? "error.main"
                   : isRevealed && !isHyphen
                     ? "primary.light"
                     : "text.secondary",
-                textTransform: "uppercase",
+                textTransform: isArabic ? "none" : "uppercase",
+                fontFamily: isArabic
+                  ? "var(--font-arabic), sans-serif"
+                  : "inherit",
                 transition: "color 0.3s ease",
               }}
             >
@@ -87,14 +120,14 @@ export default function WordDisplay({
                   : "\u00A0"}
             </Typography>
 
-            {/* UNDERLINE FOR LETTERS (NOT SPACES OR HYPHENS) */}
+            {/* UNDERLINE FOR LETTERS */}
             {!isHyphen && (
               <Box
                 sx={{
                   width: "100%",
-                  height: 3,
+                  height: { xs: 2, sm: 3 },
                   borderRadius: 2,
-                  mt: 0.5,
+                  mt: { xs: 0.25, sm: 0.5 },
                   background: showMissed
                     ? "linear-gradient(90deg, #FF5252, #FF8A80)"
                     : isRevealed
@@ -109,7 +142,6 @@ export default function WordDisplay({
           </Box>
         );
       })}
-
     </Box>
   );
 }

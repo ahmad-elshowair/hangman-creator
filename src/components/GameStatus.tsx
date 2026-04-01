@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { useLocaleStore } from "@/store/useLocaleStore";
 
 interface GameStatusProps {
   isWordFinished: boolean;
@@ -13,6 +14,7 @@ export default function GameStatus({
   currentWord,
   wrongLetters,
 }: GameStatusProps) {
+  const t = useLocaleStore((state) => state.t);
   return (
     <>
       {/* STATUS MESSAGE */}
@@ -31,7 +33,7 @@ export default function GameStatus({
               color: isWordWon ? "success.main" : "error.main",
             }}
           >
-            {isWordWon ? "🎉 Correct!" : "😔 The word was:"}
+            {isWordWon ? `🎉 ${t("game.correct")}` : `😔 ${t("game.theWordWas")}`}
           </Typography>
           {!isWordWon && (
             <Typography

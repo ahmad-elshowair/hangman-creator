@@ -1,19 +1,15 @@
 "use client";
 
 import { IconButton, Tooltip, IconButtonProps } from "@mui/material";
-import {
-  DarkMode as DarkIcon,
-  LightMode as LightIcon,
-} from "@mui/icons-material";
-import { useThemeStore } from "@/store/useThemeStore";
+import { Translate as TranslateIcon } from "@mui/icons-material";
 import { useLocaleStore } from "@/store/useLocaleStore";
+import { useThemeStore } from "@/store/useThemeStore";
 import { useEffect, useState } from "react";
 
-export default function ThemeToggle(props: IconButtonProps) {
+export default function LanguageToggle(props: IconButtonProps) {
   const { sx, ...rest } = props;
+  const { locale, setLocale, t, hasHydrated } = useLocaleStore();
   const mode = useThemeStore((state) => state.mode);
-  const toggleMode = useThemeStore((state) => state.toggleMode);
-  const t = useLocaleStore((state) => state.t);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -21,18 +17,22 @@ export default function ThemeToggle(props: IconButtonProps) {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
+  if (!mounted || !hasHydrated) {
     return null;
   }
 
+  const toggleLanguage = () => {
+    setLocale(locale === "en" ? "ar" : "en");
+  };
+
   return (
     <Tooltip
-      title={mode === "dark" ? t("theme.switchToLight") : t("theme.switchToDark")}
+      title={locale === "en" ? t("language.switchToArabic") : t("language.switchToEnglish")}
     >
       <IconButton
-        id="theme-toggle-btn"
-        onClick={toggleMode}
-        aria-label={`Switch to ${mode === "dark" ? "light" : "dark"} mode`}
+        id="language-toggle-btn"
+        onClick={toggleLanguage}
+        aria-label={locale === "en" ? "Switch to Arabic" : "Switch to English"}
         {...rest}
         sx={{
           width: { xs: 40, md: 44 },
@@ -57,11 +57,7 @@ export default function ThemeToggle(props: IconButtonProps) {
           ...sx,
         }}
       >
-        {mode === "dark" ? (
-          <LightIcon sx={{ color: "#FFD54F", fontSize: 22 }} />
-        ) : (
-          <DarkIcon sx={{ color: "#2E7D32", fontSize: 22 }} />
-        )}
+        <TranslateIcon sx={{ color: mode === "dark" ? "#81C784" : "#2E7D32", fontSize: 22 }} />
       </IconButton>
     </Tooltip>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { useGameStore } from "@/store/useGameStore";
+import { useLocaleStore } from "@/store/useLocaleStore";
 import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
@@ -76,13 +77,15 @@ export default function SetupContent() {
     router.push("/play");
   };
 
+  const { locale, t } = useLocaleStore();
+
   const handleClear = () => {
     clearConfig();
     setCurrentWord("");
   };
 
   const handleShare = () => {
-    const url = encodeGameConfig(words, maxMistakes);
+    const url = encodeGameConfig(words, maxMistakes, locale);
     setShareUrl(url);
     setShareDialogOpen(true);
   };
@@ -144,10 +147,10 @@ export default function SetupContent() {
             mb: 1.5,
           }}
         >
-          Hangman Creator
+          {t("setup.title")}
         </Typography>
         <Typography variant="body1" color="text.secondary">
-          Set up your custom Hangman game for students
+          {t("setup.subtitle")}
         </Typography>
       </Box>
 
@@ -161,7 +164,7 @@ export default function SetupContent() {
       >
         {/* MAX MISTAKES */}
         <Typography variant="h6" sx={{ mb: 2 }}>
-          Max Mistakes Allowed
+          {t("setup.maxMistakes")}
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center", gap: 2, mb: 4 }}>
           <Slider
@@ -199,13 +202,13 @@ export default function SetupContent() {
 
         {/* WORD INPUT */}
         <Typography variant="h6" sx={{ mb: 2 }}>
-          Word List
+          {t("setup.wordList")}
         </Typography>
         <Box sx={{ display: "flex", gap: 1, mb: 2 }}>
           <TextField
             id="word-input"
             fullWidth
-            placeholder="Type a word and press Enter..."
+            placeholder={t("setup.placeholder")}
             value={currentWord}
             onChange={(e) => setCurrentWord(e.target.value)}
             onKeyDown={handleKeyDown}
@@ -237,8 +240,7 @@ export default function SetupContent() {
                 opacity: 0.8,
               }}
             >
-              Words are blurred to hide them from students. Hover over a word to
-              reveal it.
+              {t("setup.wordsBlurred")}
             </Typography>
             <Box
               sx={{
@@ -296,7 +298,7 @@ export default function SetupContent() {
             color="text.secondary"
             sx={{ textAlign: "center", py: 3 }}
           >
-            No words added yet. Add at least one word to start the game.
+            {t("setup.noWords")}
           </Typography>
         )}
       </Paper>
@@ -328,7 +330,7 @@ export default function SetupContent() {
             },
           }}
         >
-          Clear
+          {t("setup.clear")}
         </Button>
         <Button
           id="start-btn"
@@ -345,7 +347,7 @@ export default function SetupContent() {
             fontSize: { xs: "0.8rem", sm: "0.85rem" },
           }}
         >
-          Start ({words.length} word{words.length !== 1 ? "s" : ""})
+          {t("setup.start")} ({words.length})
         </Button>
         <Button
           id="share-btn"
@@ -367,7 +369,7 @@ export default function SetupContent() {
             },
           }}
         >
-          Share
+          {t("setup.share")}
         </Button>
       </Box>
 
@@ -378,11 +380,10 @@ export default function SetupContent() {
         maxWidth="sm"
         fullWidth
       >
-        <DialogTitle sx={{ fontWeight: 700 }}>Share This Game</DialogTitle>
+        <DialogTitle sx={{ fontWeight: 700 }}>{t("setup.shareTitle")}</DialogTitle>
         <DialogContent>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-            Copy the link below and paste it into your slides, browser, or chat.
-            Students will see only the game — no word list.
+            {t("setup.shareInstructions")}
           </Typography>
           <TextField
             fullWidth
@@ -410,13 +411,13 @@ export default function SetupContent() {
           />
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 2 }}>
-          <Button onClick={() => setShareDialogOpen(false)}>Close</Button>
+          <Button onClick={() => setShareDialogOpen(false)}>{t("setup.close")}</Button>
           <Button
             variant="contained"
             startIcon={<CopyIcon />}
             onClick={handleCopyLink}
           >
-            Copy Link
+            {t("setup.copyLink")}
           </Button>
         </DialogActions>
       </Dialog>
@@ -426,7 +427,7 @@ export default function SetupContent() {
         open={snackbarOpen}
         autoHideDuration={3000}
         onClose={() => setSnackbarOpen(false)}
-        message="✅ Link copied to clipboard!"
+        message={`✅ ${t("setup.copied")}`}
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       />
     </Container>

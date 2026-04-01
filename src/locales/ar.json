@@ -1,0 +1,62 @@
+{
+  "setup": {
+    "title": "صانع لعبة المشنقة",
+    "subtitle": "أنشئ لعبة مشنقة مخصصة لطلابك",
+    "maxMistakes": "الحد الأقصى للأخطاء المسموح",
+    "wordList": "قائمة الكلمات",
+    "placeholder": "اكتب كلمة ثم اضغط Enter...",
+    "noWords": "لم تتم إضافة كلمات بعد...",
+    "wordsBlurred": "الكلمات غير واضحة لإخفائها عن الطلاب",
+    "clear": "مسح",
+    "start": "ابدأ",
+    "share": "مشاركة",
+    "shareTitle": "مشاركة هذه اللعبة",
+    "shareInstructions": "انسخ الرابط أدناه لمشاركة هذه اللعبة مع الطلاب",
+    "copyLink": "نسخ الرابط",
+    "close": "إغلاق",
+    "copied": "تم نسخ الرابط إلى الحافظة!"
+  },
+  "play": {
+    "noConfig": "لم يتم العثور على إعدادات اللعبة",
+    "goBack": "يرجى الععود إلى الإعداد لإنشاء لعبة أولاً.",
+    "nextWord": "الكلمة التالية",
+    "finishGame": "إنهاء اللعبة",
+    "revealWord": "كشف الكلمة"
+  },
+  "game": {
+    "wordOf": "الكلمة {current} من {total}",
+    "mistakesOf": "{current} من {max} أخطاء",
+    "correct": "صحيح!",
+    "theWordWas": "الكلمة كانت:",
+    "perfectScore": "نتيجة مثالية!",
+    "gameOver": "انتهت اللعبة!",
+    "completedWords": "أكملت جميع الكلمات الـ {total}",
+    "correctLabel": "صحيح",
+    "missedLabel": "خطأ",
+    "newGame": "لعبة جديدة",
+    "playAgain": "العب مرة أخرى"
+  },
+  "header": {
+    "backToSetup": "العودة إلى الإعداد",
+    "logoAlt": "شعار صانع لعبة المشنقة",
+    "title": "لعبة المشنقة"
+  },
+  "footer": {
+    "createdWith": "أنشئ",
+    "by": "بواسطة"
+  },
+  "theme": {
+    "switchToLight": "التبديل إلى الوضع الفاتح",
+    "switchToDark": "التبديل إلى الوضع الداكن"
+  },
+  "language": {
+    "switchToArabic": "التبديل إلى العربية",
+    "switchToEnglish": "التبديل إلى الإنجليزية"
+  },
+  "dialog": {
+    "languageMismatchTitle": "اختلاف اللغة",
+    "languageMismatchMessage": "هذه اللعبة باللغة {language}. هل تريد التبديل اللغة للحصول على أفضل تجربة؟",
+    "switchLanguage": "تبديل اللغة",
+    "keepCurrent": "الاحتفاظ بالحالية"
+  }
+}

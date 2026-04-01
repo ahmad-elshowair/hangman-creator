@@ -1,0 +1,62 @@
+{
+  "setup": {
+    "title": "Hangman Creator",
+    "subtitle": "Set up your custom Hangman game for students",
+    "maxMistakes": "Max Mistakes Allowed",
+    "wordList": "Word List",
+    "placeholder": "Type a word and press Enter...",
+    "noWords": "No words added yet...",
+    "wordsBlurred": "Words are blurred to hide them from students peeking",
+    "clear": "Clear",
+    "start": "Start",
+    "share": "Share",
+    "shareTitle": "Share This Game",
+    "shareInstructions": "Copy the link below to share this game with students",
+    "copyLink": "Copy Link",
+    "close": "Close",
+    "copied": "Link copied to clipboard!"
+  },
+  "play": {
+    "noConfig": "No Game Configuration Found",
+    "goBack": "Please go back to setup to create a game first.",
+    "nextWord": "Next Word",
+    "finishGame": "Finish Game",
+    "revealWord": "Reveal Word"
+  },
+  "game": {
+    "wordOf": "Word {current} of {total}",
+    "mistakesOf": "{current} of {max} mistakes",
+    "correct": "Correct!",
+    "theWordWas": "The word was:",
+    "perfectScore": "Perfect Score!",
+    "gameOver": "Game Over!",
+    "completedWords": "You completed all {total} words",
+    "correctLabel": "Correct",
+    "missedLabel": "Missed",
+    "newGame": "New Game",
+    "playAgain": "Play Again"
+  },
+  "header": {
+    "backToSetup": "Back to Setup",
+    "logoAlt": "Hangman Creator Logo",
+    "title": "Hangman"
+  },
+  "footer": {
+    "createdWith": "Created with",
+    "by": "by"
+  },
+  "theme": {
+    "switchToLight": "Switch to Light Mode",
+    "switchToDark": "Switch to Dark Mode"
+  },
+  "language": {
+    "switchToArabic": "Switch to Arabic",
+    "switchToEnglish": "Switch to English"
+  },
+  "dialog": {
+    "languageMismatchTitle": "Language Mismatch",
+    "languageMismatchMessage": "This game is in {language}. Switch language for the best experience?",
+    "switchLanguage": "Switch Language",
+    "keepCurrent": "Keep Current"
+  }
+}
