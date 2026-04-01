@@ -68,8 +68,8 @@
 
 ### Implementation for User Story 2
 
-- [ ] T017 [US2] Create LanguageToggle component in `src/components/LanguageToggle.tsx` — MUI IconButton with language icon (e.g., Translate or Globe icon from @mui/icons-material); tooltip shows `t("language.switchToArabic")` or `t("language.switchToEnglish")` based on current locale; calls `setLocale()` from `useLocaleStore`; follows same pattern as `src/components/ThemeToggle.tsx`
-- [ ] T018 [US2] Update Header component in `src/components/Header.tsx` — add LanguageToggle next to ThemeToggle in the AppBar; extract hardcoded "Hangman" title string to use `t("header.title")`; extract "Back to Setup" tooltip to use `t("header.backToSetup")`; ensure logo/title alignment works in both LTR and RTL
+- [x] T017 [US2] Create LanguageToggle component in `src/components/LanguageToggle.tsx` — MUI IconButton with language icon (e.g., Translate or Globe icon from @mui/icons-material); tooltip shows `t("language.switchToArabic")` or `t("language.switchToEnglish")` based on current locale; calls `setLocale()` from `useLocaleStore`; follows same pattern as `src/components/ThemeToggle.tsx`
+- [x] T018 [US2] Update Header component in `src/components/Header.tsx` — add LanguageToggle next to ThemeToggle in the AppBar; extract hardcoded "Hangman" title string to use `t("header.title")`; extract "Back to Setup" tooltip to use `t("header.backToSetup")`; ensure logo/title alignment works in both LTR and RTL
 
 **Checkpoint**: Language switching works — toggle between EN/AR, all UI text updates, preference persists
 

@@ -4,11 +4,15 @@ import { AppBar, Toolbar, Typography, Tooltip, Box } from "@mui/material";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import ThemeToggle from "./ThemeToggle";
+import LanguageToggle from "./LanguageToggle";
 import logoPic from "../../public/logo.png";
 import { gradients } from "@/constants/gradients";
+import { useLocaleStore } from "@/store/useLocaleStore";
 
 export default function Header() {
   const router = useRouter();
+  const { t, direction } = useLocaleStore();
+
   return (
     <AppBar
       position="sticky"
@@ -20,7 +24,7 @@ export default function Header() {
       }}
     >
       <Toolbar>
-        <Tooltip title="Back to Setup">
+        <Tooltip title={t("header.backToSetup")}>
           <Box
             component="button"
             onClick={() => router.push("/")}
@@ -49,7 +53,8 @@ export default function Header() {
               style={{
                 borderRadius: "8px",
                 objectFit: "contain",
-                marginRight: "12px",
+                marginRight: direction === "rtl" ? "0" : "12px",
+                marginLeft: direction === "rtl" ? "12px" : "0",
                 boxShadow: "2px 2px 4px rgba(0,0,0,0.1)",
               }}
             />
@@ -68,14 +73,17 @@ export default function Header() {
                 },
               }}
             >
-              Hangman
+              {t("header.title")}
             </Typography>
           </Box>
         </Tooltip>
 
         <Box sx={{ flexGrow: 1 }} />
 
-        <ThemeToggle edge="end" />
+        <Box sx={{ display: "flex", gap: 1 }}>
+          <LanguageToggle edge="end" />
+          <ThemeToggle edge="end" />
+        </Box>
       </Toolbar>
     </AppBar>
   );
