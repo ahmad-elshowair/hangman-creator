@@ -1,6 +1,7 @@
 "use client";
 
 import { useGameStore } from "@/store/useGameStore";
+import { useLocaleStore } from "@/store/useLocaleStore";
 import { useEffect, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import { useRouter } from "next/navigation";
@@ -76,13 +77,15 @@ export default function SetupContent() {
     router.push("/play");
   };
 
+  const locale = useLocaleStore((state) => state.locale);
+
   const handleClear = () => {
     clearConfig();
     setCurrentWord("");
   };
 
   const handleShare = () => {
-    const url = encodeGameConfig(words, maxMistakes);
+    const url = encodeGameConfig(words, maxMistakes, locale);
     setShareUrl(url);
     setShareDialogOpen(true);
   };

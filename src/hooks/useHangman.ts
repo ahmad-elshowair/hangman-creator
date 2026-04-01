@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useCallback, useMemo } from "react";
+import { containsArabic } from "@/utils/scriptDetection";
+import { normalizeArabicForGameplay } from "@/utils/arabicNormalization";
 
 interface HangmanState {
   currentWordIndex: number;
@@ -11,6 +13,7 @@ interface HangmanState {
 interface UseHangmanReturn {
   // CURRENT WORD STATE
   currentWord: string;
+  currentWordIsArabic: boolean;
   currentWordIndex: number;
   totalWords: number;
   maskedWord: string[];
@@ -38,6 +41,13 @@ interface UseHangmanReturn {
   resetGame: () => void;
 }
 
+export function getLamAlefMappedLetters(letter: string): string[] {
+  if (letter === "\uFEFB" || letter === "لا") {
+    return ["\u0644", "\u0627"]; // Lam + Alef
+  }
+  return [letter];
+}
+
 export function useHangman(
   words: string[],
   maxMistakes: number,
@@ -48,7 +58,14 @@ export function useHangman(
     results: [],
   });
 
-  const currentWord = words[state.currentWordIndex]?.toUpperCase() ?? "";
+  const rawWord = words[state.currentWordIndex] ?? "";
+  const currentWord = useMemo(() => {
+    // Uppercase applies to Latin, passes Arabic through. 
+    // Then normalize decomposes Lam-Alef and strips diacritics.
+    return normalizeArabicForGameplay(rawWord.toUpperCase());
+  }, [rawWord]);
+
+  const currentWordIsArabic = useMemo(() => containsArabic(currentWord), [currentWord]);
   const totalWords = words.length;
 
   const correctLetters = useMemo(() => {
@@ -94,16 +111,31 @@ export function useHangman(
 
   const guessLetter = useCallback(
     (letter: string) => {
-      const upper = letter.toUpperCase();
       if (isWordFinished) return;
-      if (state.guessedLetters.has(upper)) return;
+      
+      const upper = letter.toUpperCase();
+      const mappedLetters = getLamAlefMappedLetters(upper);
 
-      setState((prev) => ({
-        ...prev,
-        guessedLetters: new Set(prev.guessedLetters).add(upper),
-      }));
+      setState((prev) => {
+        const newGuessed = new Set(prev.guessedLetters);
+        let added = false;
+        
+        for (const l of mappedLetters) {
+          if (!newGuessed.has(l)) {
+            newGuessed.add(l);
+            added = true;
+          }
+        }
+        
+        if (!added) return prev; // No new letters added
+
+        return {
+          ...prev,
+          guessedLetters: newGuessed,
+        };
+      });
     },
-    [isWordFinished, state.guessedLetters],
+    [isWordFinished],
   );
 
   const revealWord = useCallback(() => {
@@ -146,6 +178,7 @@ export function useHangman(
 
   return {
     currentWord,
+    currentWordIsArabic,
     currentWordIndex: state.currentWordIndex,
     totalWords,
     maskedWord,

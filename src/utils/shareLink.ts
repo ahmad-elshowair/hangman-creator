@@ -3,9 +3,12 @@
  * ENCODES/DECODES GAME CONFIG INTO URL HASH FRAGMENTS FOR SHARING.
  */
 
+import { normalizeArabicForGameplay } from "@/utils/arabicNormalization";
+
 interface CompactConfig {
   w: string[];
   m: number;
+  l?: "en" | "ar";
 }
 
 /**
@@ -15,11 +18,12 @@ interface CompactConfig {
 export function encodeGameConfig(
   words: string[],
   maxMistakes: number,
+  locale: "en" | "ar",
   basePath: string = "/hangman-creator",
 ): string {
-  const compact: CompactConfig = { w: words, m: maxMistakes };
+  const compact: CompactConfig = { w: words, m: maxMistakes, l: locale };
   const json = JSON.stringify(compact);
-  const base64 = btoa(encodeURIComponent(json));
+  const base64 = typeof window !== "undefined" ? btoa(encodeURIComponent(json)) : Buffer.from(encodeURIComponent(json)).toString('base64');
   const urlSafeBase64 = base64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
   
   const origin =
@@ -33,7 +37,7 @@ export function encodeGameConfig(
  */
 export function decodeGameConfig(
   payload: string,
-): { words: string[]; maxMistakes: number } | null {
+): { words: string[]; maxMistakes: number; locale: "en" | "ar" } | null {
   try {
     if (!payload) return null;
 
@@ -45,7 +49,8 @@ export function decodeGameConfig(
     // Also replace spaces with '+' to catch links corrupted by messaging wrappers
     const base64 = rawData.replace(/-/g, "+").replace(/_/g, "/").replace(/ /g, "+");
 
-    const json = decodeURIComponent(atob(base64));
+    const decodedStr = typeof window !== "undefined" ? atob(base64) : Buffer.from(base64, 'base64').toString();
+    const json = decodeURIComponent(decodedStr);
     const parsed: CompactConfig = JSON.parse(json);
 
     // VALIDATE THE STRUCTURE
@@ -63,7 +68,9 @@ export function decodeGameConfig(
       return null;
     }
 
-    return { words: parsed.w, maxMistakes: parsed.m };
+    const normalizedWords = parsed.w.map((w) => normalizeArabicForGameplay(w));
+
+    return { words: normalizedWords, maxMistakes: parsed.m, locale: parsed.l || "en" };
   } catch {
     return null;
   }

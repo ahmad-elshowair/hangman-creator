@@ -43,7 +43,6 @@ export default function PlayContent() {
     setHashChecked(true);
   }, [router]);
 
-  // PARSE THE CURRENT SEARCH PARAMETERS
   const sharedConfig = useMemo(() => {
     const configParam = searchParams.get("config");
     if (!configParam) return null;
@@ -96,6 +95,7 @@ interface GameViewProps {
 function GameView({ config }: GameViewProps) {
   const {
     currentWord,
+    currentWordIsArabic,
     currentWordIndex,
     totalWords,
     maskedWord,
@@ -119,8 +119,9 @@ function GameView({ config }: GameViewProps) {
   // HANDLE KEYBOARD INPUT
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
-      const letter = e.key.toUpperCase();
-      if (/^[A-Z]$/.test(letter)) {
+      const letter = e.key;
+      // Match Latin A-Z, a-z, and Arabic unicode blocks
+      if (/^[a-zA-Z]$/.test(letter) || /^[\u0600-\u06FF\uFEFB]$/.test(letter)) {
         guessLetter(letter);
       }
     };
@@ -172,6 +173,7 @@ function GameView({ config }: GameViewProps) {
           isWordFinished={isWordFinished}
           currentWord={currentWord}
           isWordWon={isWordWon}
+          isArabic={currentWordIsArabic}
         />
       </Box>
 
@@ -222,6 +224,7 @@ function GameView({ config }: GameViewProps) {
               correctLetters={correctLetters}
               disabled={isWordFinished}
               onGuess={guessLetter}
+              script={currentWordIsArabic ? "arabic" : "latin"}
             />
             <Button
               variant="text"

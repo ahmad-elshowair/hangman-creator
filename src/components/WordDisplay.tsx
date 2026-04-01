@@ -7,6 +7,7 @@ interface WordDisplayProps {
   isWordFinished: boolean;
   currentWord: string;
   isWordWon: boolean;
+  isArabic?: boolean;
 }
 
 export default function WordDisplay({
@@ -14,6 +15,7 @@ export default function WordDisplay({
   isWordFinished,
   currentWord,
   isWordWon,
+  isArabic = false,
 }: WordDisplayProps) {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
@@ -31,6 +33,7 @@ export default function WordDisplay({
         justifyContent: "center",
         flexWrap: "nowrap", // Strictly one line
         width: "100%",
+        direction: isArabic ? "rtl" : "ltr",
         gap: {
           xs: isLongPhrase ? 0.15 : 0.25,
           sm: isLongPhrase ? 0.25 : 0.5,
@@ -94,7 +97,8 @@ export default function WordDisplay({
                   : isRevealed && !isHyphen
                     ? "primary.light"
                     : "text.secondary",
-                textTransform: "uppercase",
+                textTransform: isArabic ? "none" : "uppercase",
+                fontFamily: isArabic ? "var(--font-arabic), sans-serif" : "inherit",
                 transition: "color 0.3s ease",
               }}
             >
