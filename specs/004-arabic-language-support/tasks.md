@@ -83,14 +83,14 @@
 
 ### Implementation for User Story 3
 
-- [ ] T019 [P] [US3] Extract strings from SetupContent in `src/components/SetupContent.tsx` — replace all hardcoded English strings with `t()` calls: title, subtitle, maxMistakes label, wordList label, placeholder, noWords, wordsBlurred, clear, start, share, shareTitle, shareInstructions, copyLink, close, copied toast
-- [ ] T020 [P] [US3] Extract strings from PlayContent in `src/components/PlayContent.tsx` — replace hardcoded strings with `t()` calls: noConfig message, goBack, nextWord, finishGame, revealWord
-- [ ] T021 [P] [US3] Extract strings from GameStatus in `src/components/GameStatus.tsx` — replace "Correct!" and "The word was:" with `t("game.correct")` and `t("game.theWordWas")`
-- [ ] T022 [P] [US3] Extract strings from GameSummary in `src/components/GameSummary.tsx` — replace all hardcoded strings with `t()` calls: perfectScore, gameOver, completedWords, correctLabel, missedLabel, newGame, playAgain
-- [ ] T023 [P] [US3] Extract strings from GameProgress in `src/components/GameProgress.tsx` — replace "Word X of Y" and "X / Y mistakes" with `t("game.wordOf")` and `t("game.mistakesOf")` with parameter interpolation
-- [ ] T024 [P] [US3] Extract strings from Footer in `src/components/Footer.tsx` — replace "Created with" and "by" with `t("footer.createdWith")` and `t("footer.by")`
-- [ ] T025 [P] [US3] Extract strings from ThemeToggle in `src/components/ThemeToggle.tsx` — replace tooltip strings with `t("theme.switchToLight")` and `t("theme.switchToDark")`
-- [ ] T026 [US3] Verify RTL layout rendering and game state preservation across all components — switch to Arabic and validate: header logo/controls align right-to-left, word display letters render RTL, Arabic keyboard rows display correctly in RTL, progress bar direction flips, game summary layout mirrors, no overlapping elements or visual glitches; also verify FR-012: start a game, switch language mid-game, confirm guessed letters, mistakes count, and word progress are preserved without reset
+- [x] T019 [P] [US3] Extract strings from SetupContent in `src/components/SetupContent.tsx` — replace all hardcoded English strings with `t()` calls: title, subtitle, maxMistakes label, wordList label, placeholder, noWords, wordsBlurred, clear, start, share, shareTitle, shareInstructions, copyLink, close, copied toast
+- [x] T020 [P] [US3] Extract strings from PlayContent in `src/components/PlayContent.tsx` — replace hardcoded strings with `t()` calls: noConfig message, goBack, nextWord, finishGame, revealWord
+- [x] T021 [P] [US3] Extract strings from GameStatus in `src/components/GameStatus.tsx` — replace "Correct!" and "The word was:" with `t("game.correct")` and `t("game.theWordWas")`
+- [x] T022 [P] [US3] Extract strings from GameSummary in `src/components/GameSummary.tsx` — replace all hardcoded strings with `t()` calls: perfectScore, gameOver, completedWords, correctLabel, missedLabel, newGame, playAgain
+- [x] T023 [P] [US3] Extract strings from GameProgress in `src/components/GameProgress.tsx` — replace "Word X of Y" and "X / Y mistakes" with `t("game.wordOf")` and `t("game.mistakesOf")` with parameter interpolation
+- [x] T024 [P] [US3] Extract strings from Footer in `src/components/Footer.tsx` — replace "Created with" and "by" with `t("footer.createdWith")` and `t("footer.by")`
+- [x] T025 [P] [US3] Extract strings from ThemeToggle in `src/components/ThemeToggle.tsx` — replace tooltip strings with `t("theme.switchToLight")` and `t("theme.switchToDark")`
+- [x] T026 [US3] Verify RTL layout rendering and game state preservation across all components — switch to Arabic and validate: header logo/controls align right-to-left, word display letters render RTL, Arabic keyboard rows display correctly in RTL, progress bar direction flips, game summary layout mirrors, no overlapping elements or visual glitches; also verify FR-012: start a game, switch language mid-game, confirm guessed letters, mistakes count, and word progress are preserved without reset
 
 **Checkpoint**: Full RTL experience — switching to Arabic mirrors the entire layout, no English text remains
 

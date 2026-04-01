@@ -27,7 +27,7 @@
     "wordOf": "Word {current} of {total}",
     "mistakesOf": "{current} of {max} mistakes",
     "correct": "Correct!",
-    "theWordWas": "The word was: {word}",
+    "theWordWas": "The word was:",
     "perfectScore": "Perfect Score!",
     "gameOver": "Game Over!",
     "completedWords": "You completed all {total} words",

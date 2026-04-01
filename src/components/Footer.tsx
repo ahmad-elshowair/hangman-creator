@@ -2,8 +2,10 @@
 
 import { Box, Typography, Link } from "@mui/material";
 import { Favorite as HeartIcon } from "@mui/icons-material";
+import { useLocaleStore } from "@/store/useLocaleStore";
 
 export default function Footer() {
+  const t = useLocaleStore((state) => state.t);
   return (
     <Box
       component="footer"
@@ -23,7 +25,7 @@ export default function Footer() {
           gap: 0.5,
         }}
       >
-        Created with
+        {t("footer.createdWith")}
         <HeartIcon
           sx={{
             fontSize: 16,
@@ -31,7 +33,7 @@ export default function Footer() {
             animation: "heartbeat 1.5s ease-in-out infinite",
           }}
         />
-        by{" "}
+        {t("footer.by")}{" "}
         <Link
           href="https://www.linkedin.com/in/ahmad-elshowair/"
           target="_blank"

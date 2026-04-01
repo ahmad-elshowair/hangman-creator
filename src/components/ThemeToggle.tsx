@@ -6,12 +6,14 @@ import {
   LightMode as LightIcon,
 } from "@mui/icons-material";
 import { useThemeStore } from "@/store/useThemeStore";
+import { useLocaleStore } from "@/store/useLocaleStore";
 import { useEffect, useState } from "react";
 
 export default function ThemeToggle(props: IconButtonProps) {
   const { sx, ...rest } = props;
   const mode = useThemeStore((state) => state.mode);
   const toggleMode = useThemeStore((state) => state.toggleMode);
+  const t = useLocaleStore((state) => state.t);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -25,7 +27,7 @@ export default function ThemeToggle(props: IconButtonProps) {
 
   return (
     <Tooltip
-      title={mode === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
+      title={mode === "dark" ? t("theme.switchToLight") : t("theme.switchToDark")}
     >
       <IconButton
         id="theme-toggle-btn"

@@ -11,6 +11,7 @@ import {
 } from "@mui/icons-material";
 import { useHangman } from "@/hooks/useHangman";
 import { useGameStore } from "@/store/useGameStore";
+import { useLocaleStore } from "@/store/useLocaleStore";
 import HangmanFigure from "@/components/HangmanFigure";
 import Keyboard from "@/components/Keyboard";
 import WordDisplay from "@/components/WordDisplay";
@@ -24,6 +25,7 @@ export default function PlayContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { words, maxMistakes, hasHydrated } = useGameStore();
+  const t = useLocaleStore((state) => state.t);
 
   // BACKWARD COMPATIBILITY & URL STATE INITIALIZATION
   const [hashChecked, setHashChecked] = useState(false);
@@ -69,10 +71,10 @@ export default function PlayContent() {
     return (
       <Container maxWidth="sm" sx={{ py: 8, textAlign: "center" }}>
         <Typography variant="h5" sx={{ mb: 2 }}>
-          No Game Configuration Found
+          {t("play.noConfig")}
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
-          Please go to setup and add some words to play.
+          {t("play.goBack")}
         </Typography>
         <Button
           variant="contained"
@@ -115,6 +117,7 @@ function GameView({ config }: GameViewProps) {
     nextWord,
     resetGame,
   } = useHangman(config.words, config.maxMistakes);
+  const t = useLocaleStore((state) => state.t);
 
   // HANDLE KEYBOARD INPUT
   useEffect(() => {
@@ -208,7 +211,7 @@ function GameView({ config }: GameViewProps) {
                 fontSize: "1.1rem",
               }}
             >
-              {currentWordIndex === totalWords - 1 ? "Finish Game" : "Next Word"}
+              {currentWordIndex === totalWords - 1 ? t("play.finishGame") : t("play.nextWord")}
             </Button>
           </Box>
         ) : (
@@ -240,7 +243,7 @@ function GameView({ config }: GameViewProps) {
                 fontWeight: 600,
               }}
             >
-              Reveal Word
+              {t("play.revealWord")}
             </Button>
           </Box>
         )}

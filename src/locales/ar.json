@@ -27,7 +27,7 @@
     "wordOf": "الكلمة {current} من {total}",
     "mistakesOf": "{current} من {max} أخطاء",
     "correct": "صحيح!",
-    "theWordWas": "الكلمة كانت: {word}",
+    "theWordWas": "الكلمة كانت:",
     "perfectScore": "نتيجة مثالية!",
     "gameOver": "انتهت اللعبة!",
     "completedWords": "أكملت جميع الكلمات البـ {total}",

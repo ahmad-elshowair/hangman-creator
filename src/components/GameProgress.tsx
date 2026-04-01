@@ -1,5 +1,6 @@
 import { Box, LinearProgress, Typography, useTheme } from "@mui/material";
 import { gradients } from "@/constants/gradients";
+import { useLocaleStore } from "@/store/useLocaleStore";
 
 interface GameProgressProps {
   currentWordIndex: number;
@@ -16,6 +17,7 @@ export default function GameProgress({
 }: GameProgressProps) {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
+  const t = useLocaleStore((state) => state.t);
 
   return (
     <Box sx={{ mb: 3 }}>
@@ -29,7 +31,7 @@ export default function GameProgress({
         }}
       >
         <Typography variant="body2" color="text.secondary">
-          Word {currentWordIndex + 1} of {totalWords}
+          {t("game.wordOf", { current: currentWordIndex + 1, total: totalWords })}
         </Typography>
         <Typography
           variant="body2"
@@ -40,7 +42,7 @@ export default function GameProgress({
             transition: "all 0.3s ease",
           }}
         >
-          {mistakes} / {maxMistakes} mistakes
+          {t("game.mistakesOf", { current: mistakes, max: maxMistakes })}
         </Typography>
       </Box>
 

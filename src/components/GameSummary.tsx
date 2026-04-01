@@ -14,6 +14,7 @@ import {
 import { useRouter } from "next/navigation";
 import { gradients } from "@/constants/gradients";
 import { neuShadows } from "@/constants/neumorphism";
+import { useLocaleStore } from "@/store/useLocaleStore";
 
 interface GameSummaryProps {
   totalWords: number;
@@ -37,6 +38,7 @@ export default function GameSummary({
   const isDark = theme.palette.mode === "dark";
   const neu = isDark ? neuShadows.dark : neuShadows.light;
   const allCorrect = losses === 0;
+  const t = useLocaleStore((state) => state.t);
 
   return (
     <Container maxWidth="sm" sx={{ py: { xs: 4, md: 6 } }}>
@@ -69,10 +71,10 @@ export default function GameSummary({
             WebkitTextFillColor: "transparent",
           }}
         >
-          {allCorrect ? "Perfect Score!" : "Game Over!"}
+          {allCorrect ? t("game.perfectScore") : t("game.gameOver")}
         </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
-          You completed all {totalWords} word{totalWords === 1 ? "" : "s"}
+          {t("game.completedWords", { total: totalWords })}
         </Typography>
 
         {/* STATS */}
@@ -92,7 +94,7 @@ export default function GameSummary({
               {wins}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Correct
+              {t("game.correctLabel")}
             </Typography>
           </Box>
           <Box>
@@ -103,7 +105,7 @@ export default function GameSummary({
               {losses}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              Missed
+              {t("game.missedLabel")}
             </Typography>
           </Box>
         </Box>
@@ -154,7 +156,7 @@ export default function GameSummary({
               borderColor: "rgba(255, 255, 255, 0.15)",
             }}
           >
-            New Game
+            {t("game.newGame")}
           </Button>
           <Button
             id="play-again-btn"
@@ -164,7 +166,7 @@ export default function GameSummary({
             onClick={resetGame}
             sx={{ borderRadius: 3, py: 1.5 }}
           >
-            Play Again
+            {t("game.playAgain")}
           </Button>
         </Box>
       </Paper>
