@@ -13,6 +13,7 @@ import {
 } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import { gradients } from "@/constants/gradients";
+import { neuShadows } from "@/constants/neumorphism";
 
 interface GameSummaryProps {
   totalWords: number;
@@ -34,6 +35,7 @@ export default function GameSummary({
   const router = useRouter();
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
+  const neu = isDark ? neuShadows.dark : neuShadows.light;
   const allCorrect = losses === 0;
 
   return (
@@ -43,7 +45,6 @@ export default function GameSummary({
         sx={{
           p: { xs: 3, md: 5 },
           textAlign: "center",
-          background: isDark ? "rgba(15, 26, 20, 0.7)" : undefined,
         }}
       >
         {/* TROPHY ICON */}
@@ -113,7 +114,7 @@ export default function GameSummary({
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
-            gap: 1,
+            gap: 1.5,
             mb: 4,
           }}
         >
@@ -128,9 +129,9 @@ export default function GameSummary({
                 fontWeight: 600,
                 background:
                   results[i] === "win"
-                    ? "rgba(105, 240, 174, 0.12)"
-                    : "rgba(255, 82, 82, 0.12)",
-                border: `1px solid ${results[i] === "win" ? "rgba(105, 240, 174, 0.3)" : "rgba(255, 82, 82, 0.3)"}`,
+                    ? "rgba(46, 125, 50, 0.12)"
+                    : "rgba(211, 47, 47, 0.1)",
+                boxShadow: neu.raisedSmall,
                 color: results[i] === "win" ? "success.main" : "error.main",
               }}
             >

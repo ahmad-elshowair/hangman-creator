@@ -31,12 +31,14 @@ import {
 } from "@mui/icons-material";
 import { gradients } from "@/constants/gradients";
 import { encodeGameConfig } from "@/utils/shareLink";
+import { neuShadows } from "@/constants/neumorphism";
 
 
 export default function SetupContent() {
   const router = useRouter();
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
+  const neu = isDark ? neuShadows.dark : neuShadows.light;
   const [mounted, setMounted] = useState(false);
   const {
     words,
@@ -155,7 +157,6 @@ export default function SetupContent() {
         sx={{
           p: { xs: 2.5, md: 4 },
           mb: 3,
-          background: isDark ? "rgba(15, 26, 20, 0.7)" : undefined,
         }}
       >
         {/* MAX MISTAKES */}
@@ -175,7 +176,7 @@ export default function SetupContent() {
               flex: 1,
               "& .MuiSlider-thumb": {
                 background: gradients.brandReverse,
-                boxShadow: "0 0 12px rgba(46, 125, 50, 0.5)",
+                boxShadow: neu.raisedSmall,
               },
               "& .MuiSlider-track": {
                 background: gradients.progress,
@@ -189,8 +190,9 @@ export default function SetupContent() {
               fontWeight: 700,
               fontSize: "1.1rem",
               minWidth: 44,
-              background: "rgba(46, 125, 50, 0.2)",
-              border: "1px solid rgba(46, 125, 50, 0.3)",
+              background: isDark ? "rgba(46, 125, 50, 0.2)" : "rgba(46, 125, 50, 0.1)",
+              border: "none",
+              boxShadow: neu.raisedSmall,
             }}
           />
         </Box>
@@ -266,15 +268,17 @@ export default function SetupContent() {
                   sx={{
                     fontWeight: 500,
                     fontSize: "0.9rem",
-                    background: "rgba(46, 125, 50, 0.12)",
-                    border: "1px solid rgba(46, 125, 50, 0.2)",
+                    background: isDark ? "rgba(46, 125, 50, 0.12)" : "rgba(46, 125, 50, 0.08)",
+                    border: "none",
+                    boxShadow: neu.raisedSmall,
                     transition: "all 0.3s ease",
                     "& .MuiChip-label": {
                       filter: "blur(4px)",
                       transition: "filter 0.3s ease",
                     },
                     "&:hover": {
-                      background: "rgba(46, 125, 50, 0.2)",
+                      background: isDark ? "rgba(46, 125, 50, 0.2)" : "rgba(46, 125, 50, 0.15)",
+                      boxShadow: neu.flat,
                       "& .MuiChip-label": {
                         filter: "blur(0)",
                       },
