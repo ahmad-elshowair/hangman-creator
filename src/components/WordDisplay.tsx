@@ -18,14 +18,23 @@ export default function WordDisplay({
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
 
+  // Use a minimum divisor for scaling so short words don't become excessively huge
+  // but long phrases shrink smoothly on small screens.
+  const charCount = Math.max(10, maskedWord.length);
+
+  const isLongPhrase = maskedWord.length > 18;
+
   return (
     <Box
       sx={{
         display: "flex",
         justifyContent: "center",
-        flexWrap: "nowrap",
+        flexWrap: "nowrap", // Strictly one line
         width: "100%",
-        gap: { xs: 0.5, sm: 1 },
+        gap: {
+          xs: isLongPhrase ? 0.15 : 0.25,
+          sm: isLongPhrase ? 0.25 : 0.5,
+        },
         my: 3,
       }}
     >
@@ -40,7 +49,14 @@ export default function WordDisplay({
 
         if (isSpace) {
           return (
-            <Box key={i} sx={{ width: { xs: 12, sm: 20 }, flexShrink: 0 }} />
+            <Box
+              key={i}
+              sx={{
+                width: `calc(40vw / ${charCount})`,
+                maxWidth: 24,
+                flexShrink: 1,
+              }}
+            />
           );
         }
 
@@ -66,10 +82,12 @@ export default function WordDisplay({
               component="span"
               sx={{
                 fontWeight: 800,
+                // Scale font dynamically to never overflow the box width
                 fontSize: {
-                  xs: "clamp(1rem, 5vw, 1.5rem)",
-                  sm: "clamp(1.2rem, 4vw, 2.2rem)",
+                  xs: `clamp(0.4rem, calc(80vw / ${charCount}), 1.5rem)`,
+                  sm: `clamp(0.6rem, calc(80vw / ${charCount}), 2.2rem)`,
                 },
+                lineHeight: 1,
                 letterSpacing: "0.05em",
                 color: showMissed
                   ? "error.main"
@@ -87,14 +105,14 @@ export default function WordDisplay({
                   : "\u00A0"}
             </Typography>
 
-            {/* UNDERLINE FOR LETTERS (NOT SPACES OR HYPHENS) */}
+            {/* UNDERLINE FOR LETTERS */}
             {!isHyphen && (
               <Box
                 sx={{
                   width: "100%",
-                  height: 3,
+                  height: { xs: 2, sm: 3 },
                   borderRadius: 2,
-                  mt: 0.5,
+                  mt: { xs: 0.25, sm: 0.5 },
                   background: showMissed
                     ? "linear-gradient(90deg, #FF5252, #FF8A80)"
                     : isRevealed
@@ -109,7 +127,6 @@ export default function WordDisplay({
           </Box>
         );
       })}
-
     </Box>
   );
 }

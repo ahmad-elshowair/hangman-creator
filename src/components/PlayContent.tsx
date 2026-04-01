@@ -143,100 +143,105 @@ function GameView({ config }: GameViewProps) {
   }
 
   return (
-    <Container maxWidth="sm" sx={{ py: { xs: 3, md: 5 } }}>
-      {/* PROGRESS BAR SECTION */}
-      <GameProgress
-        currentWordIndex={currentWordIndex}
-        totalWords={totalWords}
-        mistakes={mistakes}
-        maxMistakes={maxMistakes}
-      />
+    <Box sx={{ py: { xs: 3, md: 5 } }}>
+      <Container maxWidth="sm">
+        {/* PROGRESS BAR SECTION */}
+        <GameProgress
+          currentWordIndex={currentWordIndex}
+          totalWords={totalWords}
+          mistakes={mistakes}
+          maxMistakes={maxMistakes}
+        />
 
-      {/* HANGMAN FIGURE */}
-      <Paper
-        elevation={0}
-        sx={{
-          p: 2,
-          mb: 2,
-        }}
-      >
-        <HangmanFigure mistakes={mistakes} maxMistakes={maxMistakes} />
-      </Paper>
-
-      {/* WORD DISPLAY */}
-      <WordDisplay
-        maskedWord={maskedWord}
-        isWordFinished={isWordFinished}
-        currentWord={currentWord}
-        isWordWon={isWordWon}
-      />
-
-      {/* STATUS AND WRONG LETTERS */}
-      <GameStatus
-        isWordFinished={isWordFinished}
-        isWordWon={isWordWon}
-        currentWord={currentWord}
-        wrongLetters={wrongLetters}
-      />
-
-      {/* KEYBOARD OR NEXT BUTTON */}
-      {isWordFinished ? (
-        <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
-          <Button
-            id="next-word-btn"
-            variant="contained"
-            size="large"
-            endIcon={
-              currentWordIndex === totalWords - 1 ? (
-                <TrophyIcon />
-              ) : (
-                <NextIcon />
-              )
-            }
-            onClick={nextWord}
-            sx={{
-              borderRadius: 3,
-              px: 5,
-              py: 1.5,
-              fontSize: "1.1rem",
-            }}
-          >
-            {currentWordIndex === totalWords - 1 ? "Finish Game" : "Next Word"}
-          </Button>
-        </Box>
-      ) : (
-        <Box
+        {/* HANGMAN FIGURE */}
+        <Paper
+          elevation={0}
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            p: 2,
+            mb: 2,
           }}
         >
-          <Keyboard
-            guessedLetters={guessedLetters}
-            correctLetters={correctLetters}
-            disabled={isWordFinished}
-            onGuess={guessLetter}
-          />
-          <Button
-            variant="text"
-            color="secondary"
-            onClick={revealWord}
-            startIcon={<RevealIcon />}
+          <HangmanFigure mistakes={mistakes} maxMistakes={maxMistakes} />
+        </Paper>
+      </Container>
+
+      {/* WORD DISPLAY - Full Width */}
+      <Box sx={{ width: "100%", px: { xs: 1, sm: 2, md: 4 } }}>
+        <WordDisplay
+          maskedWord={maskedWord}
+          isWordFinished={isWordFinished}
+          currentWord={currentWord}
+          isWordWon={isWordWon}
+        />
+      </Box>
+
+      <Container maxWidth="sm">
+        {/* STATUS AND WRONG LETTERS */}
+        <GameStatus
+          isWordFinished={isWordFinished}
+          isWordWon={isWordWon}
+          currentWord={currentWord}
+          wrongLetters={wrongLetters}
+        />
+
+        {/* KEYBOARD OR NEXT BUTTON */}
+        {isWordFinished ? (
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
+            <Button
+              id="next-word-btn"
+              variant="contained"
+              size="large"
+              endIcon={
+                currentWordIndex === totalWords - 1 ? (
+                  <TrophyIcon />
+                ) : (
+                  <NextIcon />
+                )
+              }
+              onClick={nextWord}
+              sx={{
+                borderRadius: 3,
+                px: 5,
+                py: 1.5,
+                fontSize: "1.1rem",
+              }}
+            >
+              {currentWordIndex === totalWords - 1 ? "Finish Game" : "Next Word"}
+            </Button>
+          </Box>
+        ) : (
+          <Box
             sx={{
-              mt: 3,
-              opacity: 0.7,
-              "&:hover": { opacity: 1 },
-              textTransform: "uppercase",
-              letterSpacing: "0.05em",
-              fontWeight: 600,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            Reveal Word
-          </Button>
-        </Box>
-      )}
-
-    </Container>
+            <Keyboard
+              guessedLetters={guessedLetters}
+              correctLetters={correctLetters}
+              disabled={isWordFinished}
+              onGuess={guessLetter}
+            />
+            <Button
+              variant="text"
+              color="secondary"
+              onClick={revealWord}
+              startIcon={<RevealIcon />}
+              sx={{
+                mt: 3,
+                opacity: 0.7,
+                "&:hover": { opacity: 1 },
+                textTransform: "uppercase",
+                letterSpacing: "0.05em",
+                fontWeight: 600,
+              }}
+            >
+              Reveal Word
+            </Button>
+          </Box>
+        )}
+      </Container>
+    </Box>
   );
 }
