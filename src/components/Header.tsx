@@ -2,7 +2,9 @@
 
 import { AppBar, Toolbar, Typography, Tooltip, Box } from "@mui/material";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import ThemeToggle from "./ThemeToggle";
+import logoPic from "../../public/logo.png";
 import { gradients } from "@/constants/gradients";
 
 export default function Header() {
@@ -40,6 +42,19 @@ export default function Header() {
               },
             }}
           >
+            <Image
+              src={logoPic}
+              alt="Hangman Creator Logo"
+              width={36}
+              height={36}
+              priority
+              style={{
+                borderRadius: "8px",
+                objectFit: "contain",
+                marginRight: "12px",
+                boxShadow: "2px 2px 4px rgba(0,0,0,0.1)",
+              }}
+            />
             <Typography
               variant="h6"
               component="div"
@@ -55,7 +70,7 @@ export default function Header() {
                 },
               }}
             >
-              Hangman Creator
+              Hangman
             </Typography>
           </Box>
         </Tooltip>
